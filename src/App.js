@@ -3,6 +3,7 @@ import axios from 'axios';
 import LoginForm from './components/LoginForm';
 import NewUserForm from './components/NewUserForm';
 
+
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
   const [toggleError, setToggleError] = useState(false);
@@ -30,10 +31,7 @@ const App = () => {
       <div>
         <h1>Exquisite Corpse</h1>
       </div>
-
-      <>
-        <NewUserForm />
-      </>
+      <NewUserForm handleCreateUser={handleCreateUser} toggleError={toggleError} errorMessage={errorMessage}/>
     </div>
   );
 };
