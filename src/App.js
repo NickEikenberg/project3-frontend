@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
-import LoginForm from './LoginForm'
-import NewUserForm from './NewUserForm'
+import axios from 'axios';
+import LoginForm from './LoginForm';
+import NewUserForm from './NewUserForm';
 
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
@@ -14,20 +15,21 @@ const App = () => {
     .then((res) => {
       if (res.data.username) {
         console.log(res);
-        setToggleError(false)
-        setErrorMessage('')
-        setCurrentUser(res.data)
-        handleToggleLogout()
+        setToggleError(false);
+        setErrorMessage('');
+        setCurrentUser(res.data);
+        handleToggleLogout();
       } else {
-        setErrorMessage(res.data)
-        setToggleError(true)
+        setErrorMessage(res.data);
+        setToggleError(true);
       }
-    })
-  }
+    });
+  };
 
   return (
     <div>
       <h1>Exquisite Corpse</h1>
+      <NewUserForm handleCreateUser={handleCreateUser} toggleError={toggleError} errorMessage={errorMessage}/>
     </div>
   );
 };
