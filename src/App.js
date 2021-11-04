@@ -66,22 +66,30 @@ const App = () => {
         <h1>Exquisite Corpse</h1>
       </header>
       <div>
-        {toggleLogin ? (
-          <LoginForm
-            handleLogin={handleLogin}
-            toggleError={toggleError}
-            errorMessage={errorMessage}
-          />
+        {toggleLogout ? (
+          <button onClick={handleLogout} class="logoutBtn">
+            Logout
+          </button>
         ) : (
-          <NewUserForm
-            handleCreateUser={handleCreateUser}
-            toggleError={toggleError}
-            errorMessage={errorMessage}
-          />
+          <div>
+            {toggleLogin ? (
+              <LoginForm
+                handleLogin={handleLogin}
+                toggleError={toggleError}
+                errorMessage={errorMessage}
+              />
+            ) : (
+              <NewUserForm
+                handleCreateUser={handleCreateUser}
+                toggleError={toggleError}
+                errorMessage={errorMessage}
+              />
+            )}
+            <button onClick={handleToggleForm} class="accountBtn">
+              {toggleLogin ? 'Need an account?' : 'Already have an account?'}
+            </button>
+          </div>
         )}
-        <button onClick={handleToggleForm} class="accountBtn">
-          {toggleLogin ? 'Need an account?' : 'Already have an account?'}
-        </button>
       </div>
       {currentUser.username && (
         <div class="loggedInDiv">
