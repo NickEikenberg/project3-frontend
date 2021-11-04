@@ -11,7 +11,8 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
 
   const handleCreateUser = (userObj) => {
-    axios.post('http://localhost:3001/users/new', userObj).then((res) => {
+    axios.post('http://localhost:3001/users/new', userObj)
+    .then((res) => {
       if (res.data.username) {
         setToggleError(false);
         setErrorMessage('');
@@ -31,6 +32,19 @@ const App = () => {
         setToggleError(false);
         setErrorMessage('');
         setCurrentUser(res.data);
+        handleToggleLogout();
+      } else {
+        setToggleError(true);
+        setErrorMessage(res.data);
+      }
+    });
+  };
+
+  const handleDelete = () => {
+    axios.delete(`http://localhost:3001/users/${currentUser.username}`)
+    .then((res) => {
+      if(res.data.username) {
+        setCurrentUser({});
         handleToggleLogout();
       } else {
         setToggleError(true);
@@ -68,8 +82,11 @@ const App = () => {
       </header>
       <div>
         {toggleLogout ?
-          <button onClick={handleLogout} class='logoutBtn'>Logout</button> :
-            <div>
+          <div>
+            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleDelete}>Delete User</button>
+          </div>:
+          <div>
             {toggleLogin ?
               <LoginForm handleLogin={handleLogin} toggleError={toggleError} errorMessage={errorMessage}/> :
               <NewUserForm handleCreateUser={handleCreateUser} toggleError={toggleError} errorMessage={errorMessage}/>
