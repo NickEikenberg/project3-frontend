@@ -38,6 +38,20 @@ const App = () => {
     });
   };
 
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:3001/users/${currentUser.username}`)
+      .then((res) => {
+        if (res.data.username) {
+          setCurrentUser({});
+          handleToggleLogout();
+        } else {
+          setToggleError(true);
+          setErrorMessage(res.data);
+        }
+      });
+  };
+
   const handleLogout = () => {
     setCurrentUser({});
     handleToggleLogout();
@@ -67,9 +81,10 @@ const App = () => {
       </header>
       <div>
         {toggleLogout ? (
-          <button onClick={handleLogout} class="logoutBtn">
-            Logout
-          </button>
+          <div>
+            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleDelete}>Delete User</button>
+          </div>
         ) : (
           <div>
             {toggleLogin ? (
