@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import io from 'socket.io-client';
 
 const JoinRoomForm = ({ user, setUser }) => {
   const [roomName, setRoomName] = useState();
@@ -9,7 +10,11 @@ const JoinRoomForm = ({ user, setUser }) => {
   };
 
   const handleJoin = () => {
-    setUser({...user, room: roomName});
+    const newSocket = io(
+      'http://localhost:3001',
+      { query: { roomName } }
+    );
+    setUser({ ...user, room: roomName, socket: newSocket });
   };
 
   return (
