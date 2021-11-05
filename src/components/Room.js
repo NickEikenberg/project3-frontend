@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 
 const Room = ({ user, setUser }) => {
   const [messages, setMessages] = useState([]);
@@ -6,13 +6,23 @@ const Room = ({ user, setUser }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setMessages([...messages, `${user.username}: ${input.current.value}`]);
-    input.current.value = '';
+    if (input.current.value) {
+      user.socket.emit('send-message', { sender: user.username, text: input.current.value })
+      setMessages([...messages, `${user.username}: ${input.current.value}`]);
+      input.current.value = '';
+    }
   };
 
   const handleLeave = () => {
+    user.socket.close();
     setUser({...user, room: ''});
   };
+
+  useEffect(() => {
+    user.socket.on('receive-message', ({ sender, text }) => {
+      setMessages([...messages, `${sender}: ${text}`]);
+    })
+  }, [user.socket, messages]);
 
   return (
     <div>

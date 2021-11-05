@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import LoginForm from './components/LoginForm';
 import NewUserForm from './components/NewUserForm';
@@ -104,7 +104,7 @@ const App = () => {
             )}
             <button
               onClick={handleToggleForm}
-              class="accountBtn text-center hover:underline"
+              className="accountBtn text-center hover:underline"
             >
               {toggleLogin ? 'Need an account?' : 'Already have an account?'}
             </button>
@@ -112,13 +112,13 @@ const App = () => {
         )}
       </div>
       {currentUser.username && (
-        <div class="loggedInDiv">
+        <div className="loggedInDiv">
           <h1>
             Hi, {currentUser.username}!
           </h1>
           {currentUser.room ?
-            <Room user={currentUser} setUser={setCurrentUser}/> :
-            <JoinRoomForm user={currentUser} setUser={setCurrentUser}/>
+            <Room user={currentUser} setUser={setCurrentUser} /> :
+            <JoinRoomForm user={currentUser} setUser={setCurrentUser} />
           }
         </div>
       )}
