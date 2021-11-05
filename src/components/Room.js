@@ -15,7 +15,7 @@ const Room = ({ user, setUser }) => {
 
   const handleLeave = () => {
     user.socket.close();
-    setUser({...user, room: ''});
+    setUser({...user, room: '', socket: null});
   };
 
   useEffect(() => {
