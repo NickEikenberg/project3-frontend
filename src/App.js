@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoginForm from './components/LoginForm';
 import NewUserForm from './components/NewUserForm';
+import JoinRoomForm from './components/JoinRoomForm';
+import Room from './components/Room';
 
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
@@ -112,13 +114,12 @@ const App = () => {
       {currentUser.username && (
         <div class="loggedInDiv">
           <h1>
-            This entire div will only show if a user is currently logged in
+            Hi, {currentUser.username}!
           </h1>
-          <h2>
-            So you could show profile info, or whatever else you want to be
-            authentication protected!
-          </h2>
-          <h3>And you could even stick other React components in here!</h3>
+          {currentUser.room ?
+            <Room user={currentUser} setUser={setCurrentUser}/> :
+            <JoinRoomForm user={currentUser} setUser={setCurrentUser}/>
+          }
         </div>
       )}
     </div>
