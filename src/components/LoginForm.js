@@ -21,6 +21,7 @@ const UserLoginForm = (props) => {
             setUsername(event.target.value);
           }}
           className="border-b-2 border-black"
+          id="input-user"
         />
         <h2>Password</h2>
         <input
@@ -29,13 +30,14 @@ const UserLoginForm = (props) => {
             setPassword(event.target.value);
           }}
           className="border-b-2 border-black"
+          id="input-password"
         />
         {props.toggleError ? <h5>{props.errorMessage}</h5> : null}
 
         <input
           type="submit"
           value="Login"
-          className="my-4 cursor-pointer bg-blue-400 text-white rounded-xl   hover:bg-blue-500"
+          className="btn my-4 cursor-pointer bg-blue-400 text-white rounded-xl   hover:bg-blue-500 focus:bg-blue-600"
         />
       </form>
     </div>

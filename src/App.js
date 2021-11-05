@@ -100,7 +100,10 @@ const App = () => {
                 errorMessage={errorMessage}
               />
             )}
-            <button onClick={handleToggleForm} class="accountBtn text-center">
+            <button
+              onClick={handleToggleForm}
+              class="accountBtn text-center hover:underline"
+            >
               {toggleLogin ? 'Need an account?' : 'Already have an account?'}
             </button>
           </div>

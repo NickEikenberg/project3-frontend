@@ -39,7 +39,7 @@ const NewUserForm = (props) => {
         <input
           type="submit"
           value="Create Account"
-          className="my-4 cursor-pointer bg-blue-400 text-white rounded-xl hover:bg-blue-500"
+          className="my-4 cursor-pointer bg-blue-400 text-white rounded-xl hover:bg-blue-500 focus:bg-blue-600"
         />
       </form>
     </div>
