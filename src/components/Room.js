@@ -1,17 +1,17 @@
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 
 const Room = ({ user, setUser }) => {
   const [messages, setMessages] = useState([]);
   const input = useRef();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setMessages([...messages, `${user.username}: ${input.current.value}`]);
     input.current.value = '';
   };
 
   const handleLeave = () => {
-    setUser({...user, room: ''});
+    setUser({ ...user, room: '' });
   };
 
   return (
@@ -19,7 +19,14 @@ const Room = ({ user, setUser }) => {
       <h2>In Room: {user.room}</h2>
       <div id="message-container">
         {messages.map((msg, index) => (
-          <div key={index}>{msg}</div>
+          <div key={index} className="flex">
+            <img
+              src={user.avatar}
+              alt="user"
+              className="h-12 w-12 rounded-full"
+            />
+            {msg}
+          </div>
         ))}
       </div>
       <form onSubmit={handleSubmit}>

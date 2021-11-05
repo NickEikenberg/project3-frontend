@@ -113,13 +113,23 @@ const App = () => {
       </div>
       {currentUser.username && (
         <div class="loggedInDiv">
-          <h1>
-            Hi, {currentUser.username}!
-          </h1>
-          {currentUser.room ?
-            <Room user={currentUser} setUser={setCurrentUser}/> :
-            <JoinRoomForm user={currentUser} setUser={setCurrentUser}/>
-          }
+          <div className="flex justify-between">
+            <h1>Hi, {currentUser.username}! </h1>
+            <span>
+              <div className="ml-3 relative">
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={currentUser.avatar}
+                  alt={`${currentUser.username}'s avatar'`}
+                ></img>
+              </div>
+            </span>
+          </div>
+          {currentUser.room ? (
+            <Room user={currentUser} setUser={setCurrentUser} />
+          ) : (
+            <JoinRoomForm user={currentUser} setUser={setCurrentUser} />
+          )}
         </div>
       )}
     </div>

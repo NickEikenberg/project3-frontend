@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 const NewUserForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   const triggerCreateUser = (event) => {
     event.preventDefault();
-    let userObj = { username: username, password: password };
+    let userObj = { username: username, password: password, avatar: avatar };
     props.handleCreateUser(userObj);
   };
 
@@ -35,6 +36,16 @@ const NewUserForm = (props) => {
         {props.toggleError ? (
           <h5 className="errorMessage">{props.errorMessage}</h5>
         ) : null}
+
+        <h2>Upload an Avatar</h2>
+        <input
+          type="text"
+          placeholder="png or jpeg"
+          onChange={(event) => {
+            setAvatar(event.target.value);
+          }}
+          className="border-b-2 border-black"
+        />
 
         <input
           type="submit"
