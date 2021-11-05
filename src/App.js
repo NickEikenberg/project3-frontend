@@ -11,8 +11,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
 
   const handleCreateUser = (userObj) => {
-    axios.post('http://localhost:3001/users/new', userObj)
-    .then((res) => {
+    axios.post('http://localhost:3001/users/new', userObj).then((res) => {
       if (res.data.username) {
         setToggleError(false);
         setErrorMessage('');
@@ -26,9 +25,8 @@ const App = () => {
   };
 
   const handleLogin = (userObj) => {
-    axios.put('http://localhost:3001/users/login', userObj)
-    .then((res) => {
-      if(res.data.username){
+    axios.put('http://localhost:3001/users/login', userObj).then((res) => {
+      if (res.data.username) {
         setToggleError(false);
         setErrorMessage('');
         setCurrentUser(res.data);
@@ -41,16 +39,17 @@ const App = () => {
   };
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:3001/users/${currentUser.username}`)
-    .then((res) => {
-      if(res.data.username) {
-        setCurrentUser({});
-        handleToggleLogout();
-      } else {
-        setToggleError(true);
-        setErrorMessage(res.data);
-      }
-    });
+    axios
+      .delete(`http://localhost:3001/users/${currentUser.username}`)
+      .then((res) => {
+        if (res.data.username) {
+          setCurrentUser({});
+          handleToggleLogout();
+        } else {
+          setToggleError(true);
+          setErrorMessage(res.data);
+        }
+      });
   };
 
   const handleLogout = () => {
@@ -60,7 +59,7 @@ const App = () => {
 
   const handleToggleForm = () => {
     setToggleError(false);
-    if(toggleLogin === true) {
+    if (toggleLogin === true) {
       setToggleLogin(false);
     } else {
       setToggleLogin(true);
@@ -68,7 +67,7 @@ const App = () => {
   };
 
   const handleToggleLogout = () => {
-    if(toggleLogout) {
+    if (toggleLogout) {
       setToggleLogout(false);
     } else {
       setToggleLogout(true);
@@ -76,33 +75,49 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-screen ">
       <header>
-        <h1>Exquisite Corpse</h1>
+        <h1 className="text-2xl">Exquisite Corpse</h1>
       </header>
       <div>
-        {toggleLogout ?
+        {toggleLogout ? (
           <div>
             <button onClick={handleLogout}>Logout</button>
             <button onClick={handleDelete}>Delete User</button>
-          </div>:
-          <div>
-            {toggleLogin ?
-              <LoginForm handleLogin={handleLogin} toggleError={toggleError} errorMessage={errorMessage}/> :
-              <NewUserForm handleCreateUser={handleCreateUser} toggleError={toggleError} errorMessage={errorMessage}/>
-            }
-          <button onClick={handleToggleForm} class='accountBtn'>{toggleLogin ?
-          'Need an account?' : 'Already have an account?'}</button>
           </div>
-        }
+        ) : (
+          <div>
+            {toggleLogin ? (
+              <LoginForm
+                handleLogin={handleLogin}
+                toggleError={toggleError}
+                errorMessage={errorMessage}
+              />
+            ) : (
+              <NewUserForm
+                handleCreateUser={handleCreateUser}
+                toggleError={toggleError}
+                errorMessage={errorMessage}
+              />
+            )}
+            <button onClick={handleToggleForm} class="accountBtn text-center">
+              {toggleLogin ? 'Need an account?' : 'Already have an account?'}
+            </button>
+          </div>
+        )}
       </div>
-      {currentUser.username &&
-        <div class='loggedInDiv'>
-          <h1>This entire div will only show if a user is currently logged in</h1>
-          <h2>So you could show profile info, or whatever else you want to be authentication protected!</h2>
+      {currentUser.username && (
+        <div class="loggedInDiv">
+          <h1>
+            This entire div will only show if a user is currently logged in
+          </h1>
+          <h2>
+            So you could show profile info, or whatever else you want to be
+            authentication protected!
+          </h2>
           <h3>And you could even stick other React components in here!</h3>
         </div>
-      }
+      )}
     </div>
   );
 };

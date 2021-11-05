@@ -12,8 +12,8 @@ const NewUserForm = (props) => {
 
   return (
     <div class="newUserFormContainer">
-      <h1 class="newUserFormTitle">Create an Account</h1>
-      <form onSubmit={triggerCreateUser} class="inputForm">
+      <h1 className="text-center text-xl">Create an Account</h1>
+      <form onSubmit={triggerCreateUser} class="inputForm flex flex-col">
         <h2>Username</h2>
         <input
           type="text"
@@ -21,6 +21,7 @@ const NewUserForm = (props) => {
           onChange={(event) => {
             setUsername(event.target.value);
           }}
+          className="border-b-2 border-black"
         />
         <h2>Password</h2>
         <input
@@ -29,12 +30,17 @@ const NewUserForm = (props) => {
           onChange={(event) => {
             setPassword(event.target.value);
           }}
+          className="border-b-2 border-black"
         />
         {props.toggleError ? (
           <h5 className="errorMessage">{props.errorMessage}</h5>
         ) : null}
 
-        <input type="submit" value="Create Account" />
+        <input
+          type="submit"
+          value="Create Account"
+          className="my-4 cursor-pointer bg-blue-400 text-white rounded-xl hover:bg-blue-500"
+        />
       </form>
     </div>
   );
