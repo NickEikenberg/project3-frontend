@@ -12,14 +12,15 @@ const UserLoginForm = (props) => {
 
   return (
     <div className="loginFormContainer">
-      <h1>Login</h1>
-      <form onSubmit={triggerLogin}>
+      <h1 className="text-center text-xl">Login</h1>
+      <form onSubmit={triggerLogin} className="flex flex-col">
         <h2>Username</h2>
         <input
           type="text"
           onChange={(event) => {
             setUsername(event.target.value);
           }}
+          className="border-b-2 border-black"
         />
         <h2>Password</h2>
         <input
@@ -27,10 +28,15 @@ const UserLoginForm = (props) => {
           onChange={(event) => {
             setPassword(event.target.value);
           }}
+          className="border-b-2 border-black"
         />
         {props.toggleError ? <h5>{props.errorMessage}</h5> : null}
 
-        <input type="submit" value="login" />
+        <input
+          type="submit"
+          value="Login"
+          className="my-4 cursor-pointer bg-blue-400 text-white rounded-xl   hover:bg-blue-500"
+        />
       </form>
     </div>
   );

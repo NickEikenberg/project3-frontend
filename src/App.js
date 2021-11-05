@@ -75,9 +75,9 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-screen ">
       <header>
-        <h1>Exquisite Corpse</h1>
+        <h1 className="text-2xl">Exquisite Corpse</h1>
       </header>
       <div>
         {toggleLogout ? (
@@ -100,7 +100,7 @@ const App = () => {
                 errorMessage={errorMessage}
               />
             )}
-            <button onClick={handleToggleForm} class="accountBtn">
+            <button onClick={handleToggleForm} class="accountBtn text-center">
               {toggleLogin ? 'Need an account?' : 'Already have an account?'}
             </button>
           </div>
