@@ -17,36 +17,42 @@ const App = () => {
   const [toggleAvatarUpload, setToggleAvatarUpload] = useState(false);
 
   const handleCreateUser = (userObj) => {
-    axios.post('http://localhost:3001/users/new', userObj).then((res) => {
-      if (res.data.username) {
-        setToggleError(false);
-        setErrorMessage('');
-        setCurrentUser(res.data);
-        handleToggleLogout();
-      } else {
-        setErrorMessage(res.data);
-        setToggleError(true);
-      }
-    });
+    axios
+      .post('https://thawing-scrubland-60943.herokuapp.com/users/new', userObj)
+      .then((res) => {
+        if (res.data.username) {
+          setToggleError(false);
+          setErrorMessage('');
+          setCurrentUser(res.data);
+          handleToggleLogout();
+        } else {
+          setErrorMessage(res.data);
+          setToggleError(true);
+        }
+      });
   };
 
   const handleLogin = (userObj) => {
-    axios.put('http://localhost:3001/users/login', userObj).then((res) => {
-      if (res.data.username) {
-        setToggleError(false);
-        setErrorMessage('');
-        setCurrentUser(res.data);
-        handleToggleLogout();
-      } else {
-        setToggleError(true);
-        setErrorMessage(res.data);
-      }
-    });
+    axios
+      .put('https://thawing-scrubland-60943.herokuapp.com/users/login', userObj)
+      .then((res) => {
+        if (res.data.username) {
+          setToggleError(false);
+          setErrorMessage('');
+          setCurrentUser(res.data);
+          handleToggleLogout();
+        } else {
+          setToggleError(true);
+          setErrorMessage(res.data);
+        }
+      });
   };
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:3001/users/${currentUser.username}`)
+      .delete(
+        `https://thawing-scrubland-60943.herokuapp.com/users/${currentUser.username}`
+      )
       .then((res) => {
         if (res.data.username) {
           setCurrentUser({});
