@@ -27,14 +27,7 @@ const UserAvatarUpload = ({ user }) => {
       <h1>Hi {user.username}! Please upload an avatar:</h1>
 
       <form onSubmit={fileUploadHandler}>
-        <input
-          type="file"
-          onChange={(event) => {
-            fileSelectedHandler(event);
-            setAvatar(event.target.files[0]);
-          }}
-          className="border-b-2 border-black"
-        />
+        <input type="text" className="border-b-2 border-black" />
         <input type="submit" value="Submit" className="cursor-pointer"></input>
       </form>
     </div>
