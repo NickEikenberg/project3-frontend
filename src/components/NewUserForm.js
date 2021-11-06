@@ -4,23 +4,12 @@ import axios from 'axios';
 const NewUserForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const triggerCreateUser = (event) => {
     event.preventDefault();
-    let userObj = { username: username, password: password, avatar: avatar };
+    let userObj = { username: username, password: password };
     props.handleCreateUser(userObj);
-  };
-
-  const fileSelectedHandler = (event) => {
-    console.log(event.target.files[0]);
-    setSelectedFile(event.target.files[0]);
-  };
-
-  const fileUploadHandler = () => {
-    //   axios.post('')
-    // Will probably need to create a new component for uploading an avatar, so we can use the current user path
+    props.toggleAvatarUpload();
   };
 
   return (
@@ -48,16 +37,6 @@ const NewUserForm = (props) => {
         {props.toggleError ? (
           <h5 className="errorMessage">{props.errorMessage}</h5>
         ) : null}
-
-        <h2>Upload an Avatar</h2>
-        <input
-          type="file"
-          onChange={(event) => {
-            fileSelectedHandler(event);
-            setAvatar(event.target.files[0]);
-          }}
-          className="border-b-2 border-black"
-        />
 
         <input
           type="submit"
