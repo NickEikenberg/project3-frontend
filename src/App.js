@@ -16,6 +16,10 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [toggleAvatarUpload, setToggleAvatarUpload] = useState(false);
 
+  const newfunction = () => {
+    return;
+  };
+
   const handleCreateUser = (userObj) => {
     axios
       .post('http://thawing-scrubland-60943.herokuapp.com/users/new', userObj)
