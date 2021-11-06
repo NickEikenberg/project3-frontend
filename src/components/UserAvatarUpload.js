@@ -20,7 +20,6 @@ const UserAvatarUpload = ({ user }) => {
     axios.post(`http://localhost:3001/users/${user}`, formData).then((res) => {
       console.log(res);
     });
-    // Will probably need to create a new component for uploading an avatar, so we can use the current user path
   };
   return (
     <div>
