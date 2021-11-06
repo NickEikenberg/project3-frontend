@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import LoginForm from './components/LoginForm';
 import NewUserForm from './components/NewUserForm';
@@ -104,7 +104,7 @@ const App = () => {
             )}
             <button
               onClick={handleToggleForm}
-              class="accountBtn text-center hover:underline"
+              className="accountBtn text-center hover:underline"
             >
               {toggleLogin ? 'Need an account?' : 'Already have an account?'}
             </button>

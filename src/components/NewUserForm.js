@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const NewUserForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const triggerCreateUser = (event) => {
     event.preventDefault();
@@ -11,10 +13,20 @@ const NewUserForm = (props) => {
     props.handleCreateUser(userObj);
   };
 
+  const fileSelectedHandler = (event) => {
+    console.log(event.target.files[0]);
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const fileUploadHandler = () => {
+    //   axios.post('')
+    // Will probably need to create a new component for uploading an avatar, so we can use the current user path
+  };
+
   return (
-    <div class="newUserFormContainer">
+    <div className="newUserFormContainer">
       <h1 className="text-center text-xl">Create an Account</h1>
-      <form onSubmit={triggerCreateUser} class="inputForm flex flex-col">
+      <form onSubmit={triggerCreateUser} className="inputForm flex flex-col">
         <h2>Username</h2>
         <input
           type="text"
@@ -39,10 +51,10 @@ const NewUserForm = (props) => {
 
         <h2>Upload an Avatar</h2>
         <input
-          type="text"
-          placeholder="png or jpeg"
+          type="file"
           onChange={(event) => {
-            setAvatar(event.target.value);
+            fileSelectedHandler(event);
+            setAvatar(event.target.files[0]);
           }}
           className="border-b-2 border-black"
         />
