@@ -88,7 +88,7 @@ const App = () => {
     <div className="m-6 bg-gray-50">
       <Header></Header>
       <div className="flex flex-col items-center justify-center h-screen ">
-        <div>
+        <div className="">
           {toggleLogout ? (
             <div>
               <button onClick={handleLogout}>Logout</button>
