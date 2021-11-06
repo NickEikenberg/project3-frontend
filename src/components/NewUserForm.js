@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const NewUserForm = (props) => {
   const [username, setUsername] = useState('');
@@ -8,12 +9,13 @@ const NewUserForm = (props) => {
     event.preventDefault();
     let userObj = { username: username, password: password };
     props.handleCreateUser(userObj);
+    props.toggleAvatarUpload();
   };
 
   return (
-    <div class="newUserFormContainer">
+    <div className="newUserFormContainer">
       <h1 className="text-center text-xl">Create an Account</h1>
-      <form onSubmit={triggerCreateUser} class="inputForm flex flex-col">
+      <form onSubmit={triggerCreateUser} className="inputForm flex flex-col">
         <h2>Username</h2>
         <input
           type="text"
