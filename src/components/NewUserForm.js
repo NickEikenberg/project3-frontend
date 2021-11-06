@@ -4,10 +4,14 @@ import axios from 'axios';
 const NewUserForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState(
+    'https://image.flaticon.com/icons/png/512/16/16363.png'
+  );
 
   const triggerCreateUser = (event) => {
     event.preventDefault();
-    let userObj = { username: username, password: password };
+    let userObj = { username: username, password: password, avatar: avatar };
+    console.log(userObj);
     props.handleCreateUser(userObj);
     props.toggleAvatarUpload();
   };
@@ -37,7 +41,6 @@ const NewUserForm = (props) => {
         {props.toggleError ? (
           <h5 className="errorMessage">{props.errorMessage}</h5>
         ) : null}
-
         <input
           type="submit"
           value="Create Account"
