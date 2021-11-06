@@ -10,12 +10,13 @@ const UserAvatarUpload = ({ user }) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const fileUploadHandler = () => {
+  const fileUploadHandler = (event) => {
+    event.preventDefault();
     const formData = new FormData();
     formData.append(
       'avatar',
-      this.state.selectedFile,
-      this.state.selectedFile.name
+      selectedFile
+      //   this.state.selectedFile.name
     );
     axios.post(`http://localhost:3001/users/${user}`, formData).then((res) => {
       console.log(res);
@@ -34,7 +35,7 @@ const UserAvatarUpload = ({ user }) => {
           }}
           className="border-b-2 border-black"
         />
-        <input type="submit" value="Submit"></input>
+        <input type="submit" value="Submit" className="cursor-pointer"></input>
       </form>
     </div>
   );
