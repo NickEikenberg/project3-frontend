@@ -10,7 +10,9 @@ const JoinRoomForm = ({ user, setUser }) => {
   };
 
   const handleJoin = () => {
-    const newSocket = io('http://localhost:3001', { query: { roomName } });
+    const newSocket = io('http://thawing-scrubland-60943.herokuapp.com', {
+      query: { roomName },
+    });
     setUser({ ...user, room: roomName, socket: newSocket });
   };
 

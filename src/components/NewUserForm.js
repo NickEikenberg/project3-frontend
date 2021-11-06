@@ -4,10 +4,14 @@ import axios from 'axios';
 const NewUserForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState(
+    'https://image.flaticon.com/icons/png/512/16/16363.png'
+  );
 
   const triggerCreateUser = (event) => {
     event.preventDefault();
-    let userObj = { username: username, password: password };
+
+    let userObj = { username: username, password: password, avatar: avatar };
     props.handleCreateUser(userObj);
     props.toggleAvatarUpload();
   };
