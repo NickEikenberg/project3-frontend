@@ -22,7 +22,7 @@ const App = () => {
   const handleCreateUser = (userObj) => {
     console.log(userObj);
     axios
-      .post('http://thawing-scrubland-60943.herokuapp.com//users/new', userObj)
+      .post('http://thawing-scrubland-60943.herokuapp.com/users/new', userObj)
       .then((res) => {
         if (res.data.username) {
           setToggleError(false);
@@ -38,7 +38,7 @@ const App = () => {
 
   const handleLogin = (userObj) => {
     axios
-      .put('http://thawing-scrubland-60943.herokuapp.com//users/login', userObj)
+      .put('http://thawing-scrubland-60943.herokuapp.com/users/login', userObj)
       .then((res) => {
         if (res.data.username) {
           setToggleError(false);
@@ -55,7 +55,7 @@ const App = () => {
   const handleDelete = () => {
     axios
       .delete(
-        `http://thawing-scrubland-60943.herokuapp.com//users/${currentUser.username}`
+        `http://thawing-scrubland-60943.herokuapp.com/users/${currentUser.username}`
       )
       .then((res) => {
         if (res.data.username) {
