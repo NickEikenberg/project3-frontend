@@ -8,6 +8,7 @@ import JoinRoomForm from './components/JoinRoomForm';
 import Room from './components/Room';
 import UserAvatarUpload from './components/UserAvatarUpload';
 import UserProfile from './components/UserProfile';
+import UserFavorites from './components/UserFavorites';
 
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
@@ -65,6 +66,8 @@ const App = () => {
           setErrorMessage(res.data);
         }
       });
+
+    setShowUserProfile(false);
   };
 
   const handleLogout = () => {
@@ -95,12 +98,17 @@ const App = () => {
 
   return (
     <div className="flex flex-col items-center m-6 bg-gray-50">
-      <Header></Header>
+      <Header showUserProfile={setShowUserProfile}></Header>
+
       {showUserProfile && (
-        <UserProfile
-          user={currentUser}
-          showUserProfile={showUserProfile}
-        ></UserProfile>
+        <div className="h-screen">
+          <UserProfile
+            user={currentUser}
+            showUserProfile={setShowUserProfile}
+            handleLogout={handleLogout}
+            handleDelete={handleDelete}
+          ></UserProfile>
+        </div>
       )}
       <div className="flex flex-col items-center justify-center h-screen ">
         <div className="">
