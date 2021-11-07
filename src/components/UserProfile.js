@@ -23,22 +23,31 @@ const UserProfile = ({
     showUserProfile(false);
     // setShowUserProfile(false);
     event.preventDefault();
+    console.log(user);
     console.log('hello world');
+    let userObj = { username: username, avatar: avatar, id: user.id };
+    updateUsername(userObj);
   };
 
-  const updateUsername = () => {
-    axios
-      .put(
-        `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`
-      )
-      .then((res) => {
-        if (res.data.username) {
-          setCurrentUser({});
-        } else {
-          //   setToggleError(true);
-          //   setErrorMessage(res.data);
-        }
-      });
+  const updateUsername = (userObj) => {
+    if (userObj.username || userObj.avatar) {
+      axios
+        .put(
+          `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
+          userObj
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.data.username) {
+            setUsername(res.data.username);
+            setAvatar(res.data.avatar);
+            setCurrentUser(res.data);
+          } else {
+            //   setToggleError(true);
+            //   setErrorMessage(res.data);
+          }
+        });
+    }
   };
 
   return (
@@ -68,8 +77,8 @@ const UserProfile = ({
           <form onSubmit={setAvatar}>
             <input
               type="text"
-              value={user.avatar}
-              onSubmit={updateAvatar}
+              //   value={user.avatar}
+              onChange={updateAvatar}
             ></input>
             <input
               type="submit"

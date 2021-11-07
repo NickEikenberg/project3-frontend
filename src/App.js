@@ -99,9 +99,9 @@ const App = () => {
 
   return (
     <div className="flex flex-col items-center m-6 bg-gray-50">
-      <Header showUserProfile={setShowUserProfile}></Header>
+      <Header showUserProfile={setShowUserProfile} user={currentUser}></Header>
 
-      {showUserProfile && (
+      {showUserProfile ? (
         <div className="h-screen">
           <UserProfile
             user={currentUser}
@@ -111,65 +111,61 @@ const App = () => {
             setCurrentUser={setCurrentUser}
           ></UserProfile>
         </div>
-      )}
-      <div className="flex flex-col items-center justify-center h-screen ">
-        <div className="">
-          {toggleLogout ? (
-            <div>
-              <button onClick={handleLogout}>Logout</button>
-              <button onClick={handleDelete}>Delete User</button>
-            </div>
-          ) : (
-            <div>
-              {toggleLogin ? (
-                <LoginForm
-                  handleLogin={handleLogin}
-                  toggleError={toggleError}
-                  errorMessage={errorMessage}
-                />
+      ) : (
+        <div className="flex flex-col items-center justify-center h-screen ">
+          <div className="">
+            {toggleLogout ? null : (
+              <div>
+                {toggleLogin ? (
+                  <LoginForm
+                    handleLogin={handleLogin}
+                    toggleError={toggleError}
+                    errorMessage={errorMessage}
+                  />
+                ) : (
+                  <NewUserForm
+                    handleCreateUser={handleCreateUser}
+                    toggleError={toggleError}
+                    errorMessage={errorMessage}
+                    toggleAvatarUpload={handleToggleAvatarUpload}
+                  />
+                )}
+                <button
+                  onClick={handleToggleForm}
+                  className="accountBtn text-center hover:underline"
+                >
+                  {toggleLogin
+                    ? 'Need an account?'
+                    : 'Already have an account?'}
+                </button>
+              </div>
+            )}
+          </div>
+          {currentUser.username && (
+            <div class="loggedInDiv">
+              <div className="flex justify-between">
+                <h1>Hi, {currentUser.username}! </h1>
+
+                <span>
+                  <div className="ml-3 relative">
+                    <img
+                      className="h-12 w-12 rounded-full"
+                      src={currentUser.avatar}
+                      alt={`${currentUser.username}'s avatar'`}
+                    ></img>
+                  </div>
+                </span>
+              </div>
+
+              {currentUser.room ? (
+                <Room user={currentUser} setUser={setCurrentUser} />
               ) : (
-                <NewUserForm
-                  handleCreateUser={handleCreateUser}
-                  toggleError={toggleError}
-                  errorMessage={errorMessage}
-                  toggleAvatarUpload={handleToggleAvatarUpload}
-                />
+                <JoinRoomForm user={currentUser} setUser={setCurrentUser} />
               )}
-              <button
-                onClick={handleToggleForm}
-                className="accountBtn text-center hover:underline"
-              >
-                {toggleLogin ? 'Need an account?' : 'Already have an account?'}
-              </button>
             </div>
           )}
         </div>
-        {currentUser.username && (
-          <div class="loggedInDiv">
-            <div className="flex justify-between">
-              <h1>Hi, {currentUser.username}! </h1>
-
-              <span>
-                <div className="ml-3 relative">
-                  <img
-                    className="h-12 w-12 rounded-full"
-                    src={currentUser.avatar}
-                    alt={`${currentUser.username}'s avatar'`}
-                  ></img>
-                </div>
-              </span>
-            </div>
-            {toggleAvatarUpload ? (
-              <UserAvatarUpload user={currentUser}></UserAvatarUpload>
-            ) : null}
-            {currentUser.room ? (
-              <Room user={currentUser} setUser={setCurrentUser} />
-            ) : (
-              <JoinRoomForm user={currentUser} setUser={setCurrentUser} />
-            )}
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 };
