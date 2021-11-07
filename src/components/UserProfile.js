@@ -13,6 +13,9 @@ const UserProfile = ({
   const [avatar, setAvatar] = useState(user.avatar);
   //   const [toggleUserProfile, setShowUserProfile] = useState(false);
 
+  let prevUsername = username;
+  let prevAvatar = avatar;
+
   const updateAvatar = (event) => {
     event.preventDefault();
 
@@ -23,8 +26,7 @@ const UserProfile = ({
     showUserProfile(false);
     // setShowUserProfile(false);
     event.preventDefault();
-    console.log(user);
-    console.log('hello world');
+
     let userObj = { username: username, avatar: avatar, id: user.id };
     updateUsername(userObj);
   };
@@ -34,10 +36,25 @@ const UserProfile = ({
       axios
         .put(
           `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
+          { username: prevUsername, avatar: prevAvatar, id: user.id }
+        )
+        .then((res) => {
+          if (res.data.username) {
+            setUsername(res.data.username);
+            setAvatar(res.data.avatar);
+            setCurrentUser(res.data);
+          } else {
+            //   setToggleError(true);
+            //   setErrorMessage(res.data);
+          }
+        });
+    } else {
+      axios
+        .put(
+          `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
           userObj
         )
         .then((res) => {
-          console.log(res);
           if (res.data.username) {
             setUsername(res.data.username);
             setAvatar(res.data.avatar);
@@ -56,7 +73,7 @@ const UserProfile = ({
         className="w-screen h-full absolute bg-black bg-opacity-20 z-0"
         onClick={closeModal}
       ></div>
-      <div className="bg-white w-1/2 h-1/2 opacity-100 bg-opacity-100 border rounded-md shadow-md absolute p-2">
+      <div className="bg-gradient-to-r from-red-200 via-red-300 to-red-400 w-3/4 h-3/4 opacity-100 bg-opacity-100 border rounded-md shadow-md absolute p-2 mb-4">
         <div className="w-40 border-2 border-black rounded-full">
           <img
             src={avatar}
@@ -83,11 +100,6 @@ const UserProfile = ({
               type="text"
               //   value={user.avatar}
               onChange={updateAvatar}
-            ></input>
-            <input
-              type="submit"
-              value="submit"
-              className="cursor-pointer"
             ></input>
           </form>
           <div>
