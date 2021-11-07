@@ -23,7 +23,7 @@ const UserLoginForm = (props) => {
           onChange={(event) => {
             setUsername(event.target.value);
           }}
-          className="border-b-2 border-black"
+          className="border-b-2 border-black bg-transparent"
           id="input-user"
         />
         <h2>Password</h2>
@@ -32,7 +32,7 @@ const UserLoginForm = (props) => {
           onChange={(event) => {
             setPassword(event.target.value);
           }}
-          className="border-b-2 border-black"
+          className="border-b-2 border-black bg-transparent"
           id="input-password"
         />
         {props.toggleError ? <h5>{props.errorMessage}</h5> : null}
