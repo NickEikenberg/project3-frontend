@@ -90,6 +90,7 @@ const UserProfile = ({
               type="text"
               placeholder={user.username}
               onChange={(event) => setUsername(event.target.value)}
+              className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>
         </div>
@@ -100,6 +101,7 @@ const UserProfile = ({
               type="text"
               //   value={user.avatar}
               onChange={updateAvatar}
+              className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>
           <div>
