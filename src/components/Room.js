@@ -29,12 +29,6 @@ const Room = ({ user, setUser }) => {
     });
   }, [user.socket, messages]);
 
-  useEffect(() => {
-    user.socket.on('joined', (members) => {
-      setMembers(members);
-    });
-  }, [user.socket]);
-
   return (
     <div>
       <h2>In Room: {user.room}</h2>
@@ -55,7 +49,7 @@ const Room = ({ user, setUser }) => {
         <input type="submit" value="Submit Message" />
       </form>
       <button onClick={handleLeave}>Leave Room</button>
-      <RoomMembers members={members}/>
+      <RoomMembers user={user} members={members} setMembers={setMembers} />
     </div>
   );
 };
