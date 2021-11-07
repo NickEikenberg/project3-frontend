@@ -30,24 +30,18 @@ const Room = ({ user, setUser }) => {
     const messageObj = {
       avatar: user.avatar,
       sender: user.username,
-      text: input.current.value,
+      text: input.current.value
     };
 
     if (input.current.value) {
       user.socket.emit('send-message', messageObj);
-      setMessages([...messages, messageObj]);
       input.current.value = '';
     }
   };
 
   const handleBeginGame = () => {
     const turnOrder = randomize([...members]);
-    const gameObj = {
-      turnOrder,
-      currentTurnIndex: 0,
-      inProgress: true
-    };
-    user.socket.emit('begin-game', gameObj)
+    user.socket.emit('begin-game', turnOrder)
   };
 
   const handleLeave = () => {
@@ -55,30 +49,50 @@ const Room = ({ user, setUser }) => {
     setUser({ ...user, room: '', socket: null });
   };
 
-  useEffect(() => {
-    user.socket.on('receive-message', ({ sender, text, avatar }) => {
-      setMessages([...messages, { sender, text, avatar }]);
-      if (gameState.inProgress) {
-        if (gameState.currentTurnIndex === gameState.turnOrder - 1) {
-          setGameState({...gameState, currentTurnIndex: 0});
-        } else {
-          setGameState({
-            ...gameState,
-            currentTurnIndex: gameState.currentTurnIndex + 1});
+  const incrementTurnOrder = () => {
+    setGameState(prevGameState => {
+      if (!prevGameState.inProgress) return prevGameState;
+      if (prevGameState.currentTurnIndex === prevGameState.turnOrder.length - 1) {
+        return {
+          ...prevGameState,
+          currentTurnIndex: 0
+        }
+      } else {
+        return {
+          ...prevGameState,
+          currentTurnIndex: prevGameState.currentTurnIndex + 1
         }
       }
     });
-  }, [user.socket, messages]);
+  };
 
   useEffect(() => {
-    user.socket.on('game-has-begun', (gameObj) => {
-      setMessages([]);
-      setGameState(gameObj);
+    user.socket.on('receive-message', message => {
+      console.log(message.sender);
+      setMessages(prevMessages => [...prevMessages, message]);
+      incrementTurnOrder();
     });
-  }, []);
+  }, [user.socket]);
+
+  useEffect(() => {
+    user.socket.on('game-has-begun', turnOrder => {
+      setMessages([]);
+      setGameState(prevGameState => {
+        return {
+          turnOrder: turnOrder,
+          currentTurnIndex: 0,
+          inProgress: true
+        }
+      });
+    });
+  }, [user.socket]);
+
+
 
   return (
     <div>
+      {gameState.turnOrder.join(', ')}
+      {gameState.currentTurnIndex}
       <h2>In Room: {user.room}</h2>
       {gameState.inProgress ?
         <h3>Game is in progress.</h3> :
