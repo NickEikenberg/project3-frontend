@@ -30,6 +30,10 @@ const Room = ({ user, setUser }) => {
     user.socket.emit('begin-game', turnOrder)
   };
 
+  const handleEndGame = () => {
+    user.socket.emit('end-game');
+  };
+
   const handleLeave = () => {
     user.socket.close();
     setUser({ ...user, room: '', socket: null });
@@ -72,6 +76,18 @@ const Room = ({ user, setUser }) => {
     });
   }, [user.socket]);
 
+  useEffect(() => {
+    user.socket.on('game-has-ended', () => {
+      setGameState(prevGameState => {
+        return {
+          turnOrder: [],
+          currentTurnIndex: 0,
+          inProgress: false
+        }
+      });
+    });
+  }, [user.socket]);
+
   return (
     <div>
       <h2>In Room: {user.room}</h2>
@@ -98,6 +114,7 @@ const Room = ({ user, setUser }) => {
       <MessageInputForm
         gameState={gameState}
         user={user}
+        handleEndGame={handleEndGame}
       />
       {!gameState.inProgress &&
         <button
