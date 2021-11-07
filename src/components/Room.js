@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
+import RoomMembers from './RoomMembers';
 
 const Room = ({ user, setUser }) => {
   const [messages, setMessages] = useState([]);
+  const [members, setMembers] = useState([]);
   const input = useRef();
 
   const handleSubmit = (e) => {
@@ -51,6 +53,7 @@ const Room = ({ user, setUser }) => {
         <input type="submit" value="Submit Message" />
       </form>
       <button onClick={handleLeave}>Leave Room</button>
+      <RoomMembers user={user} members={members} setMembers={setMembers} />
     </div>
   );
 };

@@ -72,6 +72,7 @@ const App = () => {
 
   const handleLogout = () => {
     setCurrentUser({});
+    if (currentUser.socket) currentUser.socket.close();
     handleToggleLogout();
   };
 
