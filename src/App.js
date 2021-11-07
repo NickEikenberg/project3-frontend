@@ -7,6 +7,8 @@ import NewUserForm from './components/NewUserForm';
 import JoinRoomForm from './components/JoinRoomForm';
 import Room from './components/Room';
 import UserAvatarUpload from './components/UserAvatarUpload';
+import UserProfile from './components/UserProfile';
+import UserFavorites from './components/UserFavorites';
 
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
@@ -15,8 +17,10 @@ const App = () => {
   const [toggleLogout, setToggleLogout] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [toggleAvatarUpload, setToggleAvatarUpload] = useState(false);
+  const [showUserProfile, setShowUserProfile] = useState(false);
 
   const handleCreateUser = (userObj) => {
+    console.log(userObj);
     axios
       .post('http://thawing-scrubland-60943.herokuapp.com/users/new', userObj)
       .then((res) => {
@@ -62,10 +66,13 @@ const App = () => {
           setErrorMessage(res.data);
         }
       });
+
+    setShowUserProfile(false);
   };
 
   const handleLogout = () => {
     setCurrentUser({});
+    if (currentUser.socket) currentUser.socket.close();
     handleToggleLogout();
   };
 
@@ -91,8 +98,19 @@ const App = () => {
   };
 
   return (
-    <div className="m-6 bg-gray-50">
-      <Header></Header>
+    <div className="flex flex-col items-center m-6 bg-gray-50">
+      <Header showUserProfile={setShowUserProfile}></Header>
+
+      {showUserProfile && (
+        <div className="h-screen">
+          <UserProfile
+            user={currentUser}
+            showUserProfile={setShowUserProfile}
+            handleLogout={handleLogout}
+            handleDelete={handleDelete}
+          ></UserProfile>
+        </div>
+      )}
       <div className="flex flex-col items-center justify-center h-screen ">
         <div className="">
           {toggleLogout ? (
@@ -129,6 +147,7 @@ const App = () => {
           <div class="loggedInDiv">
             <div className="flex justify-between">
               <h1>Hi, {currentUser.username}! </h1>
+
               <span>
                 <div className="ml-3 relative">
                   <img

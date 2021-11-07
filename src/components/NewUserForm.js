@@ -10,8 +10,8 @@ const NewUserForm = (props) => {
 
   const triggerCreateUser = (event) => {
     event.preventDefault();
+
     let userObj = { username: username, password: password, avatar: avatar };
-    console.log(userObj);
     props.handleCreateUser(userObj);
     props.toggleAvatarUpload();
   };
@@ -41,6 +41,7 @@ const NewUserForm = (props) => {
         {props.toggleError ? (
           <h5 className="errorMessage">{props.errorMessage}</h5>
         ) : null}
+
         <input
           type="submit"
           value="Create Account"
