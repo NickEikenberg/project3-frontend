@@ -68,7 +68,6 @@ const Room = ({ user, setUser }) => {
 
   useEffect(() => {
     user.socket.on('receive-message', message => {
-      console.log(message.sender);
       setMessages(prevMessages => [...prevMessages, message]);
       incrementTurnOrder();
     });
@@ -91,11 +90,17 @@ const Room = ({ user, setUser }) => {
 
   return (
     <div>
-      {gameState.turnOrder.join(', ')}
-      {gameState.currentTurnIndex}
       <h2>In Room: {user.room}</h2>
       {gameState.inProgress ?
-        <h3>Game is in progress.</h3> :
+        <div>
+          <h3>Game is in progress.</h3>
+          <h4>
+          {user.username === gameState.turnOrder[gameState.currentTurnIndex] ?
+            'It is your turn' :
+            `${gameState.turnOrder[gameState.currentTurnIndex]}'s turn`
+          }
+          </h4>
+        </div> :
         <div>
           <h3>When everyone is present, you can begin game:</h3>
           <button onClick={handleBeginGame} className="border border-black rounded px-3 py-1 hover:bg-red-100">Begin Game</button>
@@ -114,11 +119,22 @@ const Room = ({ user, setUser }) => {
           </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit}>
-        <textarea ref={input}></textarea>
-        <input type="submit" value="Submit Message" />
-      </form>
-      <button onClick={handleLeave} className="border border-black rounded px-3 py-1 hover:bg-red-100">Leave Room</button>
+      {gameState.inProgress ?
+        user.username === gameState.turnOrder[gameState.currentTurnIndex] ?
+          <form onSubmit={handleSubmit}>
+            <textarea ref={input}></textarea>
+            <input type="submit" value="Submit Message" />
+          </form> :
+          <div>Not your turn</div>
+        :
+        <form onSubmit={handleSubmit}>
+          <textarea ref={input}></textarea>
+          <input type="submit" value="Submit Message" />
+        </form>
+      }
+      {!gameState.inProgress &&
+        <button onClick={handleLeave} className="border border-black rounded px-3 py-1 hover:bg-red-100">Leave Room</button>
+      }
       <RoomMembers user={user} members={members} setMembers={setMembers} gameState={gameState} />
     </div>
   );
