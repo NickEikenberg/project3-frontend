@@ -7,6 +7,7 @@ import NewUserForm from './components/NewUserForm';
 import JoinRoomForm from './components/JoinRoomForm';
 import Room from './components/Room';
 import UserAvatarUpload from './components/UserAvatarUpload';
+import UserProfile from './components/UserProfile';
 
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
@@ -92,8 +93,9 @@ const App = () => {
   };
 
   return (
-    <div className="m-6 bg-gray-50">
+    <div className="flex flex-col items-center m-6 bg-gray-50">
       <Header></Header>
+      <UserProfile user={currentUser}></UserProfile>
       <div className="flex flex-col items-center justify-center h-screen ">
         <div className="">
           {toggleLogout ? (
