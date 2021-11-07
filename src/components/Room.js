@@ -3,7 +3,7 @@ import RoomMembers from './RoomMembers';
 import MessagesContainer from './MessagesContainer';
 import MessageInputForm from './MessageInputForm';
 
-// Array randomizer cound at: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// Array randomizer found at: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 const randomize = (array) => {
   let currentIndex = array.length,  randomIndex;
 
