@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import RoomMembers from './RoomMembers';
 import MessagesContainer from './MessagesContainer';
+import MessageInputForm from './MessageInputForm';
 
 // Array randomizer cound at: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 const randomize = (array) => {
@@ -23,22 +24,6 @@ const Room = ({ user, setUser }) => {
     currentTurnIndex: 0,
     inProgress: false
   });
-  const input = useRef();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const messageObj = {
-      avatar: user.avatar,
-      sender: user.username,
-      text: input.current.value
-    };
-
-    if (input.current.value) {
-      user.socket.emit('send-message', messageObj);
-      input.current.value = '';
-    }
-  };
 
   const handleBeginGame = () => {
     const turnOrder = randomize([...members]);
@@ -110,19 +95,10 @@ const Room = ({ user, setUser }) => {
         messages={messages}
         user={user}
       />
-      {gameState.inProgress ?
-        user.username === gameState.turnOrder[gameState.currentTurnIndex] ?
-          <form onSubmit={handleSubmit}>
-            <textarea ref={input} className="border border-black rounded"></textarea>
-            <input type="submit" value="Submit Message" />
-          </form> :
-          <div>Not your turn</div>
-        :
-        <form onSubmit={handleSubmit}>
-          <textarea ref={input} className="border border-black rounded"></textarea>
-          <input type="submit" value="Submit Message" />
-        </form>
-      }
+      <MessageInputForm
+        gameState={gameState}
+        user={user}
+      />
       {!gameState.inProgress &&
         <button
           onClick={handleLeave}
