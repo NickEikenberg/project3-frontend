@@ -56,14 +56,16 @@ const Room = ({ user, setUser }) => {
     });
   };
 
+  const killLanky  = () => {
+    user.socket.emit('kill-lanky');
+  }
+
   useEffect(() => {
     user.socket.on('receive-message', message => {
       setMessages(prevMessages => [...prevMessages, message]);
       incrementTurnOrder();
     });
-  }, [user.socket]);
 
-  useEffect(() => {
     user.socket.on('game-has-begun', turnOrder => {
       setMessages([]);
       setGameState(prevGameState => {
@@ -74,9 +76,7 @@ const Room = ({ user, setUser }) => {
         }
       });
     });
-  }, [user.socket]);
 
-  useEffect(() => {
     user.socket.on('game-has-ended', () => {
       setGameState(prevGameState => {
         return {
@@ -91,6 +91,7 @@ const Room = ({ user, setUser }) => {
   return (
     <div>
       <h2>In Room: {user.room}</h2>
+      <button onClick={killLanky}>Die Lanky Die</button>
       {gameState.inProgress ?
         <div>
           <h3>Game is in progress.</h3>
