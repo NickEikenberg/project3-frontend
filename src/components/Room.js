@@ -31,7 +31,6 @@ const Room = ({ user, setUser }) => {
 
   useEffect(() => {
     user.socket.on('joined', (members) => {
-      console.log(members);
       setMembers(members);
     });
   }, [user.socket]);
