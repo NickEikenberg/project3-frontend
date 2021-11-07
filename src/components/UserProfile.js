@@ -1,7 +1,14 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import UserFavorites from './UserFavorites';
 
-const UserProfile = ({ user, showUserProfile, handleLogout, handleDelete }) => {
+const UserProfile = ({
+  user,
+  showUserProfile,
+  handleLogout,
+  handleDelete,
+  setCurrentUser,
+}) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
   //   const [toggleUserProfile, setShowUserProfile] = useState(false);
@@ -12,17 +19,35 @@ const UserProfile = ({ user, showUserProfile, handleLogout, handleDelete }) => {
     setAvatar(event.target.value);
   };
 
-  const updateUsername = (event) => {
-    event.preventDefault();
-
-    setUsername(event.target.value);
-  };
-
   const closeModal = (event) => {
     showUserProfile(false);
     // setShowUserProfile(false);
     event.preventDefault();
+    console.log(user);
     console.log('hello world');
+    let userObj = { username: username, avatar: avatar, id: user.id };
+    updateUsername(userObj);
+  };
+
+  const updateUsername = (userObj) => {
+    if (userObj.username || userObj.avatar) {
+      axios
+        .put(
+          `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
+          userObj
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.data.username) {
+            setUsername(res.data.username);
+            setAvatar(res.data.avatar);
+            setCurrentUser(res.data);
+          } else {
+            //   setToggleError(true);
+            //   setErrorMessage(res.data);
+          }
+        });
+    }
   };
 
   return (
@@ -52,8 +77,8 @@ const UserProfile = ({ user, showUserProfile, handleLogout, handleDelete }) => {
           <form onSubmit={setAvatar}>
             <input
               type="text"
-              value={user.avatar}
-              onSubmit={updateAvatar}
+              //   value={user.avatar}
+              onChange={updateAvatar}
             ></input>
             <input
               type="submit"
