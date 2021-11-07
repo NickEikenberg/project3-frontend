@@ -57,8 +57,12 @@ const UserProfile = ({
         onClick={closeModal}
       ></div>
       <div className="bg-white w-1/2 h-1/2 opacity-100 bg-opacity-100 border rounded-md shadow-md absolute p-2">
-        <div className="w-40">
-          <img src={avatar} alt={`${user.username}'`} className="w-full"></img>
+        <div className="w-40 border-2 border-black rounded-full">
+          <img
+            src={avatar}
+            alt={`${user.username}'`}
+            className="w-full rounded-full"
+          ></img>
         </div>
         <h1 className="text-5xl">{username}</h1>
 
