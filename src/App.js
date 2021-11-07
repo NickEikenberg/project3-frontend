@@ -16,6 +16,7 @@ const App = () => {
   const [toggleLogout, setToggleLogout] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [toggleAvatarUpload, setToggleAvatarUpload] = useState(false);
+  const [showUserProfile, setShowUserProfile] = useState(false);
 
   const handleCreateUser = (userObj) => {
     console.log(userObj);
@@ -95,7 +96,12 @@ const App = () => {
   return (
     <div className="flex flex-col items-center m-6 bg-gray-50">
       <Header></Header>
-      <UserProfile user={currentUser}></UserProfile>
+      {showUserProfile && (
+        <UserProfile
+          user={currentUser}
+          showUserProfile={showUserProfile}
+        ></UserProfile>
+      )}
       <div className="flex flex-col items-center justify-center h-screen ">
         <div className="">
           {toggleLogout ? (
