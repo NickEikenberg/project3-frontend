@@ -107,6 +107,7 @@ const App = () => {
             showUserProfile={setShowUserProfile}
             handleLogout={handleLogout}
             handleDelete={handleDelete}
+            setCurrentUser={setCurrentUser}
           ></UserProfile>
         </div>
       )}

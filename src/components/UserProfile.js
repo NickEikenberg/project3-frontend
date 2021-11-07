@@ -1,7 +1,14 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import UserFavorites from './UserFavorites';
 
-const UserProfile = ({ user, showUserProfile, handleLogout, handleDelete }) => {
+const UserProfile = ({
+  user,
+  showUserProfile,
+  handleLogout,
+  handleDelete,
+  setCurrentUser,
+}) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
   //   const [toggleUserProfile, setShowUserProfile] = useState(false);
@@ -12,17 +19,26 @@ const UserProfile = ({ user, showUserProfile, handleLogout, handleDelete }) => {
     setAvatar(event.target.value);
   };
 
-  const updateUsername = (event) => {
-    event.preventDefault();
-
-    setUsername(event.target.value);
-  };
-
   const closeModal = (event) => {
     showUserProfile(false);
     // setShowUserProfile(false);
     event.preventDefault();
     console.log('hello world');
+  };
+
+  const updateUsername = () => {
+    axios
+      .put(
+        `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`
+      )
+      .then((res) => {
+        if (res.data.username) {
+          setCurrentUser({});
+        } else {
+          //   setToggleError(true);
+          //   setErrorMessage(res.data);
+        }
+      });
   };
 
   return (
