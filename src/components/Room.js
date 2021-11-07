@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import RoomMembers from './RoomMembers';
+import MessagesContainer from './MessagesContainer';
 
 // Array randomizer cound at: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 const randomize = (array) => {
@@ -86,8 +87,6 @@ const Room = ({ user, setUser }) => {
     });
   }, [user.socket]);
 
-
-
   return (
     <div>
       <h2>In Room: {user.room}</h2>
@@ -106,36 +105,36 @@ const Room = ({ user, setUser }) => {
           <button onClick={handleBeginGame} className="border border-black rounded px-3 py-1 hover:bg-red-100">Begin Game</button>
         </div>
       }
-
-      <div id="message-container">
-        {messages.map((msg, index) => (
-          <div key={index} className="flex">
-            <img
-              src={msg.avatar}
-              alt={`${msg.sender}'s avatar'`}
-              className="h-12 w-12 rounded-full"
-            />
-            {`${msg.sender}: ${msg.text}`}
-          </div>
-        ))}
-      </div>
+      <MessagesContainer
+        gameState={gameState}
+        messages={messages}
+        user={user}
+      />
       {gameState.inProgress ?
         user.username === gameState.turnOrder[gameState.currentTurnIndex] ?
           <form onSubmit={handleSubmit}>
-            <textarea ref={input}></textarea>
+            <textarea ref={input} className="border border-black rounded"></textarea>
             <input type="submit" value="Submit Message" />
           </form> :
           <div>Not your turn</div>
         :
         <form onSubmit={handleSubmit}>
-          <textarea ref={input}></textarea>
+          <textarea ref={input} className="border border-black rounded"></textarea>
           <input type="submit" value="Submit Message" />
         </form>
       }
       {!gameState.inProgress &&
-        <button onClick={handleLeave} className="border border-black rounded px-3 py-1 hover:bg-red-100">Leave Room</button>
+        <button
+          onClick={handleLeave}
+          className="border border-black rounded px-3 py-1 hover:bg-red-100"
+        >Leave Room</button>
       }
-      <RoomMembers user={user} members={members} setMembers={setMembers} gameState={gameState} />
+      <RoomMembers
+        user={user}
+        members={members}
+        setMembers={setMembers}
+        gameState={gameState}
+      />
     </div>
   );
 };
