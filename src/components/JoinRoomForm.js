@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import io from 'socket.io-client';
 
 const JoinRoomForm = ({ user, setUser }) => {
@@ -18,13 +19,18 @@ const JoinRoomForm = ({ user, setUser }) => {
 
   return (
     <>
-      <input
-        type="text"
-        onChange={handleInputChange}
-        className="bg-transparent border-b-2 border-black"
-        placeholder="Enter a room name"
-      />
-      <button onClick={handleJoin}>Join room</button>
+      <div className="mt-5 px-2">
+        <input
+          type="text"
+          onChange={handleInputChange}
+          className="bg-transparent border-b-2 border-black"
+          placeholder="Enter a room name"
+        />
+        <button
+          onClick={handleJoin}
+          className="ml-3 border border-black rounded px-3 py-1 hover:bg-red-100"
+        >Join room</button>
+      </div>
     </>
   );
 };
