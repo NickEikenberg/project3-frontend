@@ -37,7 +37,7 @@ const UserProfile = ({
   const updateUsernameAndAvatar = (userObj) => {
     axios
       .put(
-        `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
+        `https://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
         userObj
       )
       .then((res) => {
@@ -93,6 +93,12 @@ const UserProfile = ({
               onClick={submitChanges}
             >
               Submit Changes
+            </button>
+            <button
+              className="bg-black text-white px-2 rounded-lg m-2 cursor-pointer"
+              onClick={() => showUserProfile(false)}
+            >
+              Close Menu
             </button>
           </div>
           <div className="w-full bg-black flex text-white justify-around rounded-sm">

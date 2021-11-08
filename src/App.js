@@ -125,7 +125,7 @@ const App = () => {
           ></UserProfile>
         </div>
       ) : (
-        <div className="flex flex-col items-center h-screen w-full border border-black rounded-sm lg:w-3/4 mb-6 ">
+        <div className="flex flex-col items-center h-screen w-full  lg:w-3/4 mb-6 ">
           <div className="">
             {toggleLogout ? null : (
               <div>
