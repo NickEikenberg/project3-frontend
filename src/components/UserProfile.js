@@ -18,20 +18,24 @@ const UserProfile = ({
 
   const updateAvatar = (event) => {
     event.preventDefault();
-
     setAvatar(event.target.value);
   };
 
   const closeModal = (event) => {
+    event.preventDefault();
     showUserProfile(false);
     // setShowUserProfile(false);
-    event.preventDefault();
-
-    let userObj = { username: username, avatar: avatar, id: user.id };
-    updateUsername(userObj);
   };
 
-  const updateUsername = (userObj) => {
+  const submitChanges = (event) => {
+    event.preventDefault();
+    showUserProfile(false);
+
+    let userObj = { username: username, avatar: avatar, id: user.id };
+    updateUsernameAndAvatar(userObj);
+  };
+
+  const updateUsernameAndAvatar = (userObj) => {
     if (userObj.username || userObj.avatar) {
       axios
         .put(
@@ -39,6 +43,7 @@ const UserProfile = ({
           { username: prevUsername, avatar: prevAvatar, id: user.id }
         )
         .then((res) => {
+          console.log(res);
           if (res.data.username) {
             setUsername(res.data.username);
             setAvatar(res.data.avatar);
@@ -88,6 +93,7 @@ const UserProfile = ({
           <form>
             <input
               type="text"
+              required
               placeholder={user.username}
               onChange={(event) => setUsername(event.target.value)}
               className="border-b-2 border-black bg-white bg-opacity-50 "
@@ -99,11 +105,20 @@ const UserProfile = ({
           <form onSubmit={setAvatar}>
             <input
               type="text"
+              required
               //   value={user.avatar}
               onChange={updateAvatar}
               className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>
+          <div>
+            <button
+              className="bg-black text-white px-2 rounded-lg m-2 cursor-pointer"
+              onClick={submitChanges}
+            >
+              Submit Changes
+            </button>
+          </div>
           <div>
             <button onClick={handleLogout}>Logout</button>
             <button onClick={handleDelete}>Delete User</button>

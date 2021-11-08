@@ -20,6 +20,10 @@ const App = () => {
   const [toggleAvatarUpload, setToggleAvatarUpload] = useState(false);
   const [showUserProfile, setShowUserProfile] = useState(false);
 
+  const toggleSetShowUserProfile = () => {
+    setShowUserProfile(!showUserProfile);
+  };
+
   const handleCreateUser = (userObj) => {
     console.log(userObj);
     axios
@@ -75,6 +79,8 @@ const App = () => {
     setCurrentUser({});
     if (currentUser.socket) currentUser.socket.close();
     handleToggleLogout();
+
+    setShowUserProfile(false);
   };
 
   const handleToggleForm = () => {
@@ -101,13 +107,16 @@ const App = () => {
   return (
     <div className="flex flex-col items-center m-6 bg-gray-50">
       <Header showUserProfile={setShowUserProfile} user={currentUser}></Header>
-      <UserWelcome user={currentUser}></UserWelcome>
+      <UserWelcome
+        user={currentUser}
+        showUserProfile={toggleSetShowUserProfile}
+      ></UserWelcome>
 
       {showUserProfile ? (
         <div className="h-screen">
           <UserProfile
             user={currentUser}
-            showUserProfile={setShowUserProfile}
+            showUserProfile={toggleSetShowUserProfile}
             handleLogout={handleLogout}
             handleDelete={handleDelete}
             setCurrentUser={setCurrentUser}
