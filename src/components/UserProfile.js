@@ -8,68 +8,48 @@ const UserProfile = ({
   handleLogout,
   handleDelete,
   setCurrentUser,
+  handleLeaveRoom
 }) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
   //   const [toggleUserProfile, setShowUserProfile] = useState(false);
 
-  let prevUsername = username;
-  let prevAvatar = avatar;
+  const updateUsername = (event) => {
+    setUsername(event.target.value)
+  };
 
   const updateAvatar = (event) => {
-    event.preventDefault();
     setAvatar(event.target.value);
   };
 
   const closeModal = (event) => {
-    event.preventDefault();
     showUserProfile(false);
     // setShowUserProfile(false);
   };
 
   const submitChanges = (event) => {
-    event.preventDefault();
     showUserProfile(false);
-
-    let userObj = { username: username, avatar: avatar, id: user.id };
+    if (user.room) handleLeaveRoom();
+    const userObj = { username: username, avatar: avatar, id: user.id };
     updateUsernameAndAvatar(userObj);
   };
 
   const updateUsernameAndAvatar = (userObj) => {
-    if (userObj.username || userObj.avatar) {
-      axios
-        .put(
-          `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
-          { username: prevUsername, avatar: prevAvatar, id: user.id }
-        )
-        .then((res) => {
-          console.log(res);
-          if (res.data.username) {
-            setUsername(res.data.username);
-            setAvatar(res.data.avatar);
-            setCurrentUser(res.data);
-          } else {
-            //   setToggleError(true);
-            //   setErrorMessage(res.data);
-          }
-        });
-    } else {
-      axios
-        .put(
-          `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
-          userObj
-        )
-        .then((res) => {
-          if (res.data.username) {
-            setUsername(res.data.username);
-            setAvatar(res.data.avatar);
-            setCurrentUser(res.data);
-          } else {
-            //   setToggleError(true);
-            //   setErrorMessage(res.data);
-          }
-        });
-    }
+    axios
+      .put(
+        `http://localhost:3001/users/${user.username}`,
+        userObj
+      )
+      .then((res) => {
+        if (res.data.username) {
+          setUsername(res.data.username);
+          setAvatar(res.data.avatar);
+          setCurrentUser(res.data);
+        } else {
+          //   setToggleError(true);
+          //   setErrorMessage(res.data);
+        }
+      });
   };
 
   return (
@@ -93,20 +73,16 @@ const UserProfile = ({
           <form>
             <input
               type="text"
-              required
-              placeholder={user.username}
-              onChange={(event) => setUsername(event.target.value)}
+              onChange={updateUsername}
               className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>
         </div>
         <div>
           <h2>Change Profile Pic:</h2>
-          <form onSubmit={setAvatar}>
+          <form>
             <input
               type="text"
-              required
-              //   value={user.avatar}
               onChange={updateAvatar}
               className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
