@@ -28,7 +28,6 @@ const UserProfile = ({
   };
 
   const submitChanges = (event) => {
-    showUserProfile(false);
     if (user.room) handleLeaveRoom();
     const userObj = { username: username, avatar: avatar, id: user.id };
     updateUsernameAndAvatar(userObj);
@@ -45,6 +44,7 @@ const UserProfile = ({
           setUsername(res.data.username);
           setAvatar(res.data.avatar);
           setCurrentUser(res.data);
+          showUserProfile(false);
         } else {
           //   setToggleError(true);
           //   setErrorMessage(res.data);

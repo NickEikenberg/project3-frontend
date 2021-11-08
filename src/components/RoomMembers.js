@@ -5,7 +5,7 @@ const RoomMembers = ({ user, members, setMembers, gameState }) => {
     user.socket.on('joined', (members) => {
       setMembers(members);
     });
-  }, [user.socket]);
+  }, [user.socket, setMembers]);
 
   return (
     <div className="bg-black text-white h-40">

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const UserLoginForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [avatar, setAvatar] = useState(
+  const [avatar] = useState(
     'https://image.flaticon.com/icons/png/512/16/16363.png'
   );
 
