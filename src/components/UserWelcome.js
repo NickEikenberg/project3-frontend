@@ -12,7 +12,7 @@ const UserWelcome = ({ user, showUserProfile }) => {
           onClick={showUserProfile}
         >
           <div className="bg-red-300 w-full mx-6 px-6 py-2 flex justify-between items-center lg:w-1/2">
-            <h1 className="text-white text-2xl">Hi, {user.username}! </h1>
+            <h1 className="text-white text-md">Hi, {user.username}! </h1>
 
             <span>
               <div className="ml-3 relative">

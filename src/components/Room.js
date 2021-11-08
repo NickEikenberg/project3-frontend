@@ -8,7 +8,7 @@ const randomize = (array) => {
   let currentIndex = array.length,
     randomIndex;
 
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
     [array[currentIndex], array[randomIndex]] = [
@@ -95,9 +95,13 @@ const Room = ({ user, setUser }) => {
   }, [user.socket]);
 
   return (
-    <div>
-      <h2>In Room: {user.room}</h2>
-      <button onClick={killLanky}>Die Lanky Die</button>
+    <div className="flex flex-col">
+      <h2 className="text-center text-white font bg-black">
+        In Room: {user.room}
+      </h2>
+      <button onClick={killLanky} className="bg-yellow-300">
+        Die Lanky Die
+      </button>
       {gameState.inProgress ? (
         <div>
           <h3>Game is in progress.</h3>
