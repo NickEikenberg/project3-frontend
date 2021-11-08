@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import UserFavorites from './UserFavorites';
 
 const UserProfile = ({
@@ -52,13 +52,6 @@ const UserProfile = ({
         showUserProfile(false);
       });
   };
-
-  useEffect(() => {
-    setAvatar(avatar);
-    return () => {
-      setAvatar({});
-    };
-  }, []);
 
   return (
     <div className="relative h-screen w-screen flex flex-col justify-center items-center">
