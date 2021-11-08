@@ -5,13 +5,16 @@ import MessageInputForm from './MessageInputForm';
 
 // Array randomizer found at: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 const randomize = (array) => {
-  let currentIndex = array.length,  randomIndex;
+  let currentIndex = array.length,
+    randomIndex;
 
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
     [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
+      array[randomIndex],
+      array[currentIndex],
+    ];
   }
   return array;
 };
@@ -22,12 +25,12 @@ const Room = ({ user, setUser }) => {
   const [gameState, setGameState] = useState({
     turnOrder: [],
     currentTurnIndex: 0,
-    inProgress: false
+    inProgress: false,
   });
 
   const handleBeginGame = () => {
     const turnOrder = randomize([...members]);
-    user.socket.emit('begin-game', turnOrder)
+    user.socket.emit('begin-game', turnOrder);
   };
 
   const handleEndGame = () => {
@@ -40,68 +43,78 @@ const Room = ({ user, setUser }) => {
   };
 
   const incrementTurnOrder = () => {
-    setGameState(prevGameState => {
+    setGameState((prevGameState) => {
       if (!prevGameState.inProgress) return prevGameState;
-      if (prevGameState.currentTurnIndex === prevGameState.turnOrder.length - 1) {
+      if (
+        prevGameState.currentTurnIndex ===
+        prevGameState.turnOrder.length - 1
+      ) {
         return {
           ...prevGameState,
-          currentTurnIndex: 0
-        }
+          currentTurnIndex: 0,
+        };
       } else {
         return {
           ...prevGameState,
-          currentTurnIndex: prevGameState.currentTurnIndex + 1
-        }
+          currentTurnIndex: prevGameState.currentTurnIndex + 1,
+        };
       }
     });
   };
 
   useEffect(() => {
-    user.socket.on('receive-message', message => {
-      setMessages(prevMessages => [...prevMessages, message]);
+    user.socket.on('receive-message', (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
       incrementTurnOrder();
     });
 
-    user.socket.on('game-has-begun', turnOrder => {
+    user.socket.on('game-has-begun', (turnOrder) => {
       setMessages([]);
-      setGameState(prevGameState => {
+      setGameState((prevGameState) => {
         return {
           turnOrder: turnOrder,
           currentTurnIndex: 0,
-          inProgress: true
-        }
+          inProgress: true,
+        };
       });
     });
 
     user.socket.on('game-has-ended', () => {
-      setGameState(prevGameState => {
+      setGameState((prevGameState) => {
         return {
           turnOrder: [],
           currentTurnIndex: 0,
-          inProgress: false
-        }
+          inProgress: false,
+        };
       });
     });
   }, [user.socket]);
 
   return (
-    <div>
-      <h2>In Room: {user.room}</h2>
-      {gameState.inProgress ?
+    <div className="flex flex-col">
+      <h2 className="text-center text-white font bg-black">
+        In Room: {user.room}
+      </h2>
+      {gameState.inProgress ? (
         <div>
           <h3>Game is in progress.</h3>
           <h4>
-          {user.username === gameState.turnOrder[gameState.currentTurnIndex] ?
-            'It is your turn' :
-            `${gameState.turnOrder[gameState.currentTurnIndex]}'s turn`
-          }
+            {user.username === gameState.turnOrder[gameState.currentTurnIndex]
+              ? 'It is your turn'
+              : `${gameState.turnOrder[gameState.currentTurnIndex]}'s turn`}
           </h4>
-        </div> :
+        </div>
+      ) : (
         <div>
           <h3>When everyone is present, you can begin game:</h3>
-          <button onClick={handleBeginGame} className="border border-black rounded px-3 py-1 hover:bg-red-100">Begin Game</button>
+          <button
+            onClick={handleBeginGame}
+            className="border border-black rounded px-3 py-1 hover:bg-red-100"
+          >
+            Begin Game
+          </button>
         </div>
-      }
+      )}
       <MessagesContainer
         gameState={gameState}
         messages={messages}
@@ -112,12 +125,14 @@ const Room = ({ user, setUser }) => {
         user={user}
         handleEndGame={handleEndGame}
       />
-      {!gameState.inProgress &&
+      {!gameState.inProgress && (
         <button
           onClick={handleLeave}
           className="border border-black rounded px-3 py-1 hover:bg-red-100"
-        >Leave Room</button>
-      }
+        >
+          Leave Room
+        </button>
+      )}
       <RoomMembers
         user={user}
         members={members}

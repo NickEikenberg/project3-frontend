@@ -13,7 +13,6 @@ const NewUserForm = (props) => {
 
     let userObj = { username: username, password: password, avatar: avatar };
     props.handleCreateUser(userObj);
-    props.toggleAvatarUpload();
   };
 
   return (
@@ -27,7 +26,7 @@ const NewUserForm = (props) => {
           onChange={(event) => {
             setUsername(event.target.value);
           }}
-          className="border-b-2 border-black"
+          className="border-b-2 border-black bg-transparent"
         />
         <h2>Password</h2>
         <input
@@ -36,7 +35,7 @@ const NewUserForm = (props) => {
           onChange={(event) => {
             setPassword(event.target.value);
           }}
-          className="border-b-2 border-black"
+          className="border-b-2 border-black bg-transparent"
         />
         {props.toggleError ? (
           <h5 className="errorMessage">{props.errorMessage}</h5>
