@@ -37,7 +37,7 @@ const UserProfile = ({
   const updateUsernameAndAvatar = (userObj) => {
     axios
       .put(
-        `http://localhost:3001/users/${user.username}`,
+        `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
         userObj
       )
       .then((res) => {
