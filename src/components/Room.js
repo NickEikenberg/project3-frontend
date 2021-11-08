@@ -62,10 +62,6 @@ const Room = ({ user, setUser }) => {
     });
   };
 
-  const killLanky = () => {
-    user.socket.emit('kill-lanky');
-  };
-
   useEffect(() => {
     user.socket.on('receive-message', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
@@ -99,9 +95,6 @@ const Room = ({ user, setUser }) => {
       <h2 className="text-center text-white font bg-black">
         In Room: {user.room}
       </h2>
-      <button onClick={killLanky} className="bg-yellow-300">
-        Die Lanky Die
-      </button>
       {gameState.inProgress ? (
         <div>
           <h3>Game is in progress.</h3>
