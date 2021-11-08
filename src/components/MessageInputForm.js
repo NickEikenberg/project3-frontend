@@ -21,12 +21,16 @@ const MessageInputForm = ({ gameState, user, handleEndGame }) => {
   return gameState.inProgress ? (
     user.username === gameState.turnOrder[gameState.currentTurnIndex] ? (
       <>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="relative overflow-hidden flex">
           <textarea
             ref={input}
-            className="border border-black rounded"
+            className="border border-black rounded w-11/12 h-full resize-none"
           ></textarea>
-          <input type="submit" value="Submit Message" />
+          <input
+            type="submit"
+            value=">"
+            className="right-0 w-1/12 rounded-lg cursor-pointer py-2 bg-green-400 hover:bg-green-300"
+          />
         </form>
         <button
           onClick={handleEndGame}

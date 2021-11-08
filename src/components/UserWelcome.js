@@ -5,13 +5,13 @@ const UserWelcome = ({ user, showUserProfile }) => {
   //     console.log('click');
   //   };
   return (
-    <div>
+    <div className="w-screen flex justify-center">
       {user.username ? (
         <div
-          className="flex justify-between w-screen cursor-pointer"
+          className="flex justify-center w-full cursor-pointer bg-red-300 mx-6"
           onClick={showUserProfile}
         >
-          <div className="bg-red-300 w-full mx-6 px-6 py-2 flex justify-between items-center lg:w-1/2">
+          <div className=" bg-red-300 w-full mx-6 px-6 py-2 flex justify-between items-center lg:w-1/2">
             <h1 className="text-white text-md">Hi, {user.username}! </h1>
 
             <span>

@@ -17,15 +17,20 @@ const JoinRoomForm = ({ user, setUser }) => {
   };
 
   return (
-    <>
+    <div className="bg-black h-20 flex justify-center items-center text-white">
       <input
         type="text"
         onChange={handleInputChange}
-        className="bg-transparent border-b-2 border-black"
+        className="bg-transparent border-b-2 border-white mx-2"
         placeholder="Enter a room name"
       />
-      <button onClick={handleJoin}>Join room</button>
-    </>
+      <button
+        onClick={handleJoin}
+        className="cursor-pointer bg-white text-black rounded-md px-2"
+      >
+        Join room
+      </button>
+    </div>
   );
 };
 

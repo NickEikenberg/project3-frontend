@@ -6,9 +6,9 @@ import LoginForm from './components/LoginForm';
 import NewUserForm from './components/NewUserForm';
 import JoinRoomForm from './components/JoinRoomForm';
 import Room from './components/Room';
-import UserAvatarUpload from './components/UserAvatarUpload';
+
 import UserProfile from './components/UserProfile';
-import UserFavorites from './components/UserFavorites';
+
 import UserWelcome from './components/UserWelcome';
 
 const App = () => {
@@ -17,7 +17,6 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [toggleLogout, setToggleLogout] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [toggleAvatarUpload, setToggleAvatarUpload] = useState(false);
   const [showUserProfile, setShowUserProfile] = useState(false);
 
   const toggleSetShowUserProfile = () => {
@@ -105,12 +104,8 @@ const App = () => {
     }
   };
 
-  const handleToggleAvatarUpload = () => {
-    setToggleAvatarUpload(true);
-  };
-
   return (
-    <div className="flex flex-col items-center m-6 bg-gray-50">
+    <div className="flex flex-col items-center m-6 bg-gray-50 rounded-md">
       <Header showUserProfile={setShowUserProfile} user={currentUser}></Header>
       <UserWelcome
         user={currentUser}
@@ -129,7 +124,7 @@ const App = () => {
           ></UserProfile>
         </div>
       ) : (
-        <div className="flex flex-col items-center h-screen">
+        <div className="flex flex-col items-center h-screen w-full border border-black rounded-sm lg:w-3/4 mb-6 ">
           <div className="">
             {toggleLogout ? null : (
               <div>
@@ -144,7 +139,6 @@ const App = () => {
                     handleCreateUser={handleCreateUser}
                     toggleError={toggleError}
                     errorMessage={errorMessage}
-                    toggleAvatarUpload={handleToggleAvatarUpload}
                   />
                 )}
                 <button
@@ -159,7 +153,7 @@ const App = () => {
             )}
           </div>
           {currentUser.username && (
-            <div class="loggedInDiv">
+            <div class="loggedInDiv w-full">
               {currentUser.room ? (
                 <Room
                   user={currentUser}

@@ -8,7 +8,7 @@ const RoomMembers = ({ user, members, setMembers, gameState }) => {
   }, [user.socket]);
 
   return (
-    <div>
+    <div className="bg-black text-white h-40">
       <h4>Room Members:</h4>
       <ul>
         {members.map((member, index) => (
@@ -17,7 +17,7 @@ const RoomMembers = ({ user, members, setMembers, gameState }) => {
             className={
               member === gameState.turnOrder[gameState.currentTurnIndex]
                 ? 'text-yellow-500'
-                : 'text-black'
+                : 'text-white'
             }
           >
             {member}
