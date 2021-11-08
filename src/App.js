@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 import Header from './components/Header';
@@ -154,7 +154,7 @@ const App = () => {
             )}
           </div>
           {currentUser.username && (
-            <div class="loggedInDiv w-full">
+            <div className="w-full">
               {currentUser.room ? (
                 <Room
                   user={currentUser}

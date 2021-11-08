@@ -44,6 +44,7 @@ const UserProfile = ({
           setUsername(res.data.username);
           setAvatar(res.data.avatar);
           setCurrentUser(res.data);
+          showUserProfile(false);
         } else {
           //   setToggleError(true);
           //   setErrorMessage(res.data);
