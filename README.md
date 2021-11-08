@@ -17,11 +17,11 @@ Back end built with Express as the web app framework, Mongoose as the data libra
 
 ## User Stories
 
-User can create an account
-User can login to that account
-User can update their username and avatar
-User can join a chat room
-User can send messages in that chat room
-Other users in that chat room will see that message
-Users can start a game together
-Users can end the game and view their created story
+User can create an account <br>
+User can login to that account <br>
+User can update their username and avatar <br>
+User can join a chat room <br>
+User can send messages in that chat room <br>
+Other users in that chat room will see that message <br>
+Users can start a game together <br>
+Users can end the game and view their created story <br>
