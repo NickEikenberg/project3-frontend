@@ -15,8 +15,8 @@ const Rules = () => {
           className=" m-2 border border-black rounded px-3 py-1 hover:bg-red-100"
         >
           {toggleRules ?
-            'Hide Rules' :
-            'Show Rules'
+            'Hide Instructions' :
+            'Show Instructions'
           }
         </button>
       </div>
