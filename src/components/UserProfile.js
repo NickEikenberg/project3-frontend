@@ -83,7 +83,7 @@ const UserProfile = ({
           <form>
             <input
               type="text"
-              // onChange={updateAvatar}
+              onChange={updateAvatar}
               className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>
