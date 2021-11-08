@@ -13,7 +13,6 @@ const NewUserForm = (props) => {
 
     let userObj = { username: username, password: password, avatar: avatar };
     props.handleCreateUser(userObj);
-    props.toggleAvatarUpload();
   };
 
   return (
