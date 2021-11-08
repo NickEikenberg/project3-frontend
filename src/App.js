@@ -10,6 +10,7 @@ import UserAvatarUpload from './components/UserAvatarUpload';
 import UserProfile from './components/UserProfile';
 import UserFavorites from './components/UserFavorites';
 import UserWelcome from './components/UserWelcome';
+import Rules from './components/Rules';
 
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
@@ -116,7 +117,7 @@ const App = () => {
         user={currentUser}
         showUserProfile={toggleSetShowUserProfile}
       ></UserWelcome>
-
+      <Rules />
       {showUserProfile ? (
         <div className="h-screen">
           <UserProfile
@@ -159,6 +160,7 @@ const App = () => {
             )}
           </div>
           {currentUser.username && (
+
             <div class="loggedInDiv">
               {currentUser.room ? (
                 <Room
