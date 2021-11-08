@@ -19,7 +19,7 @@ const randomize = (array) => {
   return array;
 };
 
-const Room = ({ user, setUser }) => {
+const Room = ({ user, setUser, handleLeave }) => {
   const [messages, setMessages] = useState([]);
   const [members, setMembers] = useState([]);
   const [gameState, setGameState] = useState({
@@ -35,11 +35,6 @@ const Room = ({ user, setUser }) => {
 
   const handleEndGame = () => {
     user.socket.emit('end-game');
-  };
-
-  const handleLeave = () => {
-    user.socket.close();
-    setUser({ ...user, room: '', socket: null });
   };
 
   const incrementTurnOrder = () => {
