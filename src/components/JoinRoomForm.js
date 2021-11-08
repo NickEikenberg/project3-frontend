@@ -10,7 +10,7 @@ const JoinRoomForm = ({ user, setUser }) => {
   };
 
   const handleJoin = () => {
-    const newSocket = io('http://thawing-scrubland-60943.herokuapp.com', {
+    const newSocket = io('https://thawing-scrubland-60943.herokuapp.com', {
       query: { roomName, username: user.username },
     });
     setUser({ ...user, room: roomName, socket: newSocket });
@@ -18,7 +18,12 @@ const JoinRoomForm = ({ user, setUser }) => {
 
   return (
     <>
-      <input type="text" onChange={handleInputChange} />
+      <input
+        type="text"
+        onChange={handleInputChange}
+        className="bg-transparent border-b-2 border-black"
+        placeholder="Enter a room name"
+      />
       <button onClick={handleJoin}>Join room</button>
     </>
   );

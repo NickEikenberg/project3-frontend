@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 const RoomMembers = ({ user, members, setMembers, gameState }) => {
-
   useEffect(() => {
     user.socket.on('joined', (members) => {
       setMembers(members);
@@ -16,11 +15,13 @@ const RoomMembers = ({ user, members, setMembers, gameState }) => {
           <li
             key={index}
             className={
-              member === gameState.turnOrder[gameState.currentTurnIndex] ?
-                'text-yellow-500' :
-                'text-black'
+              member === gameState.turnOrder[gameState.currentTurnIndex]
+                ? 'text-yellow-500'
+                : 'text-black'
             }
-          >{member}</li>
+          >
+            {member}
+          </li>
         ))}
       </ul>
     </div>
