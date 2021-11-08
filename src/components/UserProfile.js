@@ -8,14 +8,14 @@ const UserProfile = ({
   handleLogout,
   handleDelete,
   setCurrentUser,
-  handleLeaveRoom
+  handleLeaveRoom,
 }) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
   //   const [toggleUserProfile, setShowUserProfile] = useState(false);
 
   const updateUsername = (event) => {
-    setUsername(event.target.value)
+    setUsername(event.target.value);
   };
 
   const updateAvatar = (event) => {
@@ -37,7 +37,7 @@ const UserProfile = ({
   const updateUsernameAndAvatar = (userObj) => {
     axios
       .put(
-        `http://thawing-scrubland-60943.herokuapp.com/users/${user.username}`,
+        `http://thawing-scrubland-60943.herokuapp.com/users/update/${user.username}`,
         userObj
       )
       .then((res) => {
@@ -58,7 +58,7 @@ const UserProfile = ({
         className="w-screen h-full absolute bg-black bg-opacity-20 z-0"
         onClick={closeModal}
       ></div>
-      <div className="bg-gradient-to-r from-red-200 via-red-300 to-red-400 w-3/4 h-3/4 opacity-100 bg-opacity-100 border rounded-md shadow-md absolute p-2 mb-4">
+      <div className="bg-gradient-to-r from-red-200 via-red-300 to-red-400 w-3/4 opacity-100 bg-opacity-100 border rounded-md shadow-md absolute p-2 mb-4">
         <div className="w-40 border-2 border-black rounded-full">
           <img
             src={avatar}
@@ -83,7 +83,7 @@ const UserProfile = ({
           <form>
             <input
               type="text"
-              onChange={updateAvatar}
+              // onChange={updateAvatar}
               className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>
@@ -95,9 +95,19 @@ const UserProfile = ({
               Submit Changes
             </button>
           </div>
-          <div>
-            <button onClick={handleLogout}>Logout</button>
-            <button onClick={handleDelete}>Delete User</button>
+          <div className="w-full bg-black flex text-white justify-around rounded-sm">
+            <button
+              onClick={handleLogout}
+              className="w-1/2 hover:bg-white hover:text-black"
+            >
+              Logout
+            </button>
+            <button
+              onClick={handleDelete}
+              className="w-1/2 hover:bg-white hover:text-black"
+            >
+              Delete User
+            </button>
           </div>
         </div>
         <UserFavorites></UserFavorites>
