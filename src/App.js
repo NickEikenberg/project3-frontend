@@ -10,6 +10,7 @@ import Room from './components/Room';
 import UserProfile from './components/UserProfile';
 
 import UserWelcome from './components/UserWelcome';
+import Rules from './components/Rules';
 
 const App = () => {
   const [toggleLogin, setToggleLogin] = useState(true);
@@ -111,7 +112,7 @@ const App = () => {
         user={currentUser}
         showUserProfile={toggleSetShowUserProfile}
       ></UserWelcome>
-
+      <Rules />
       {showUserProfile ? (
         <div className="h-screen">
           <UserProfile
@@ -153,7 +154,12 @@ const App = () => {
             )}
           </div>
           {currentUser.username && (
+<<<<<<< HEAD
             <div class="loggedInDiv w-full">
+=======
+
+            <div class="loggedInDiv">
+>>>>>>> e044d864d838cc0c31e3f36041dd4fe2c394ad39
               {currentUser.room ? (
                 <Room
                   user={currentUser}
