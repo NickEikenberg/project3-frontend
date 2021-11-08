@@ -86,27 +86,29 @@ const Room = ({ user, setUser, handleLeave }) => {
   }, [user.socket]);
 
   return (
-    <div className="flex flex-col">
-      <h2 className="text-center text-white font bg-black">
+    <div className="flex flex-col w-full">
+      <h2 className="text-center text-white font bg-black text-2xl">
         In Room: {user.room}
       </h2>
       {gameState.inProgress ? (
-        <div>
-          <h3>Game is in progress.</h3>
-          <h4>
+        <div className="flex flex-col justify-center items-center bg-black">
+          <h3 className="text-center text-white">Game is in progress.</h3>
+          <h4 className="text-center text-white">
             {user.username === gameState.turnOrder[gameState.currentTurnIndex]
               ? 'It is your turn'
               : `${gameState.turnOrder[gameState.currentTurnIndex]}'s turn`}
           </h4>
         </div>
       ) : (
-        <div>
-          <h3>When everyone is present, you can begin game:</h3>
+        <div className="flex justify-center items-center bg-black">
+          <h3 className="text-center text-white">
+            When everyone is present, you can begin the game:
+          </h3>
           <button
             onClick={handleBeginGame}
-            className="border border-black rounded px-3 py-1 hover:bg-red-100"
+            className="bg-white border mx-2 border-black rounded px-3 py-1 hover:bg-black hover:text-white hover:border-white "
           >
-            Begin Game
+            START
           </button>
         </div>
       )}
