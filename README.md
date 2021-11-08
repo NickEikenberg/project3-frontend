@@ -12,7 +12,7 @@ Players take turns writing sentences with only the context of the previously sen
 
 ## Technologies used
 
-Front end built with React, Axios used to talk to the server, and Tailwind as the CSS framework
+Front end built with React, Axios used to talk to the server, and Tailwind as the CSS framework <br>
 Back end built with Express as the web app framework, Mongoose as the data library, and Socket.IO as the library used for user communication
 
 ## User Stories
