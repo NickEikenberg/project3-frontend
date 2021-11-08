@@ -1,4 +1,16 @@
+import { useCallback } from 'react';
+
 const MessagesContainer = ({ gameState, messages, user }) => {
+  const setRef = useCallback(node => {
+    if (node) {
+      node.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start'
+      });
+    }
+  }, []);
+
   return (
     <div className="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-100 h-60 overflow-scroll">
       {gameState.inProgress ? (
@@ -19,17 +31,24 @@ const MessagesContainer = ({ gameState, messages, user }) => {
         </div>
       ) : (
         <div className="">
-          {messages.map((msg, index) => (
-            <div key={index} className="flex items-center">
-              <img
-                src={msg.avatar}
-                alt={`${msg.sender}'s avatar'`}
-                className="h-8 w-8 rounded-full my-1"
-              />
-              <p>{msg.sender}: </p>
-              <p>{msg.text}</p>
-            </div>
-          ))}
+          {messages.map((msg, index) => {
+            const lastMessage = messages.length - 1 === index;
+            return (
+              <div
+                key={index}
+                className="flex items-center"
+                ref={lastMessage ? setRef : null}
+              >
+                <img
+                  src={msg.avatar}
+                  alt={`${msg.sender}'s avatar'`}
+                  className="h-8 w-8 rounded-full my-1"
+                />
+                <p>{msg.sender}: </p>
+                <p>{msg.text}</p>
+              </div>
+            )}
+          )}
         </div>
       )}
     </div>
