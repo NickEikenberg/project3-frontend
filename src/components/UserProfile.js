@@ -8,7 +8,7 @@ const UserProfile = ({
   handleLogout,
   handleDelete,
   setCurrentUser,
-  handleLeaveRoom,
+  handleLeaveRoom
 }) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
@@ -25,7 +25,8 @@ const UserProfile = ({
     showUserProfile(false);
   };
 
-  const submitChanges = (event) => {
+  const submitChanges = () => {
+    console.log('submit');
     if (user.room) handleLeaveRoom();
     const userObj = { username: username, avatar: avatar, id: user.id };
     updateUsernameAndAvatar(userObj);
@@ -59,7 +60,7 @@ const UserProfile = ({
             src={avatar}
             alt={`${user.username}'`}
             className="w-full rounded-full"
-          ></img>
+          />
         </div>
         <h1 className="text-5xl">{username}</h1>
 

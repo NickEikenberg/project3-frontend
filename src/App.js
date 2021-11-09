@@ -105,10 +105,15 @@ const App = () => {
   return (
     <div className="flex flex-col items-center m-6 bg-gray-50 rounded-md">
       <Header showUserProfile={setShowUserProfile} user={currentUser}></Header>
-      <UserWelcome
-        user={currentUser}
-        showUserProfile={toggleSetShowUserProfile}
-      ></UserWelcome>
+      {currentUser.room ?
+        <UserWelcome
+          user={currentUser}
+        ></UserWelcome> :
+        <UserWelcome
+          user={currentUser}
+          showUserProfile={toggleSetShowUserProfile}
+        ></UserWelcome>
+      }
       <Rules />
       {showUserProfile ? (
         <div className="h-screen">
