@@ -15,7 +15,7 @@ const MessagesContainer = ({ gameState, messages, user }) => {
   return (
     <div className="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-100 h-60 overflow-scroll">
       {gameState.inProgress ? (
-        <div className="border-b-2 border-black border-opacity-50">
+        <div>
           {messages[0] &&
             user.username ===
               gameState.turnOrder[gameState.currentTurnIndex] && (
@@ -25,7 +25,7 @@ const MessagesContainer = ({ gameState, messages, user }) => {
                   alt={`${messages[messages.length - 1].sender}'s avatar'`}
                   className="h-10 w-10 rounded-full"
                 />
-                <p className="mr-2 border-r-2 border-black border-opacity-50 pr-1">{messages[messages.length - 1].sender}:</p>
+                <p className="mr-2 pr-1">{messages[messages.length - 1].sender}:</p>
                 <p className="break-words">{messages[messages.length - 1].text}</p>
               </div>
             )}
@@ -37,7 +37,7 @@ const MessagesContainer = ({ gameState, messages, user }) => {
             return (
               <div
                 key={index}
-                className="flex border-b-2 border-black border-opacity-50"
+                className="flex"
                 ref={lastMessage ? setRef : null}
               >
                 <img
@@ -45,7 +45,7 @@ const MessagesContainer = ({ gameState, messages, user }) => {
                   alt={`${msg.sender}'s avatar'`}
                   className="h-10 w-10 rounded-full my-1"
                 />
-                <p className="mr-2 border-r-2 border-black border-opacity-50 pr-1">{msg.sender}: </p>
+                <p className="mr-2 pr-1">{msg.sender}: </p>
                 <p className="break-words">{msg.text}</p>
               </div>
             )}
