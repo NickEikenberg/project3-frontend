@@ -2,6 +2,8 @@
 
 Tinier Bananas is a take on the game <a href="https://en.wikipedia.org/wiki/Exquisite_corpse">Exquisite Corpse</a>, a party game where you create words/images with friends.
 
+[Link to live app](https://fierce-mesa-54468.herokuapp.com/)
+
 ### Create a short story with your friends
 
 The goal of the game is to create an absurd/funny short story by collecting out-of-context sentences written by you and your friends.
