@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
-
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
 import NewUserForm from './components/NewUserForm';
 import JoinRoomForm from './components/JoinRoomForm';
 import Room from './components/Room';
-
 import UserProfile from './components/UserProfile';
-
 import UserWelcome from './components/UserWelcome';
 import Rules from './components/Rules';
 
