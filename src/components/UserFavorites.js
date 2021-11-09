@@ -1,5 +1,3 @@
-import React from 'react';
-
 const UserFavorites = () => {
   return (
     <div className="z-10 absolute top-0 right-0 mx-2 w-1/3 h-1/2">
