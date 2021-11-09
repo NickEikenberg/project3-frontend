@@ -1,6 +1,7 @@
 # Project 3: Tinier Bananas
-
 Tinier Bananas is a take on the game <a href="https://en.wikipedia.org/wiki/Exquisite_corpse">Exquisite Corpse</a>, a party game where you create words/images with friends.
+
+[Link to live app](https://fierce-mesa-54468.herokuapp.com/)
 
 ### Create a short story with your friends
 
@@ -25,4 +26,3 @@ User can send messages in that chat room <br>
 Other users in that chat room will see that message <br>
 Users can start a game together <br>
 Users can end the game and view their created story <br>
-
