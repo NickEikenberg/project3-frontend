@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
-
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
 import NewUserForm from './components/NewUserForm';
 import JoinRoomForm from './components/JoinRoomForm';
 import Room from './components/Room';
-
 import UserProfile from './components/UserProfile';
-
 import UserWelcome from './components/UserWelcome';
 import Rules from './components/Rules';
 
@@ -108,10 +105,15 @@ const App = () => {
   return (
     <div className="flex flex-col items-center m-6 bg-gray-50 rounded-md">
       <Header showUserProfile={setShowUserProfile} user={currentUser}></Header>
-      <UserWelcome
-        user={currentUser}
-        showUserProfile={toggleSetShowUserProfile}
-      ></UserWelcome>
+      {currentUser.room ?
+        <UserWelcome
+          user={currentUser}
+        ></UserWelcome> :
+        <UserWelcome
+          user={currentUser}
+          showUserProfile={toggleSetShowUserProfile}
+        ></UserWelcome>
+      }
       <Rules />
       {showUserProfile ? (
         <div className="h-screen">
