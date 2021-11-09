@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import UserFavorites from './UserFavorites';
 
 const UserProfile = ({
@@ -12,7 +12,6 @@ const UserProfile = ({
 }) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
-  //   const [toggleUserProfile, setShowUserProfile] = useState(false);
 
   const updateUsername = (event) => {
     setUsername(event.target.value);
@@ -24,7 +23,6 @@ const UserProfile = ({
 
   const closeModal = (event) => {
     showUserProfile(false);
-    // setShowUserProfile(false);
   };
 
   const submitChanges = (event) => {
@@ -45,9 +43,6 @@ const UserProfile = ({
           setAvatar(res.data.avatar);
           setCurrentUser(res.data);
           showUserProfile(false);
-        } else {
-          //   setToggleError(true);
-          //   setErrorMessage(res.data);
         }
       });
   };
