@@ -12,7 +12,6 @@ const UserProfile = ({
 }) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
-  //   const [toggleUserProfile, setShowUserProfile] = useState(false);
 
   const updateUsername = (event) => {
     setUsername(event.target.value);
@@ -24,7 +23,6 @@ const UserProfile = ({
 
   const closeModal = (event) => {
     showUserProfile(false);
-    // setShowUserProfile(false);
   };
 
   const submitChanges = (event) => {
@@ -45,11 +43,7 @@ const UserProfile = ({
           setAvatar(res.data.avatar);
           setCurrentUser(res.data);
           showUserProfile(false);
-        } else {
-          //   setToggleError(true);
-          //   setErrorMessage(res.data);
         }
-        showUserProfile(false);
       });
   };
 
@@ -74,7 +68,7 @@ const UserProfile = ({
           <form>
             <input
               type="text"
-              onSubmit={updateUsername}
+              onChange={updateUsername}
               className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>

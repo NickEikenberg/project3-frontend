@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Header = ({ showUserProfile, user }) => {
   return (
     <header className="w-full flex justify-between items-center bg-white py-4 px-4 shadow-sm">
