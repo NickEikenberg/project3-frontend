@@ -15,7 +15,7 @@ const MessagesContainer = ({ gameState, messages, user }) => {
   return (
     <div className="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-100 h-60 overflow-scroll">
       {gameState.inProgress ? (
-        <div>
+        <div className="border-b-2 border-black border-opacity-50">
           {messages[0] &&
             user.username ===
               gameState.turnOrder[gameState.currentTurnIndex] && (
@@ -23,30 +23,30 @@ const MessagesContainer = ({ gameState, messages, user }) => {
                 <img
                   src={messages[messages.length - 1].avatar}
                   alt={`${messages[messages.length - 1].sender}'s avatar'`}
-                  className="h-12 w-12 rounded-full"
+                  className="h-10 w-10 rounded-full"
                 />
-                <p>{messages[messages.length - 1].sender}: </p>
-                <p>{messages[messages.length - 1].text}</p>
+                <p className="mr-2 border-r-2 border-black border-opacity-50 pr-1">{messages[messages.length - 1].sender}:</p>
+                <p className="break-words">{messages[messages.length - 1].text}</p>
               </div>
             )}
         </div>
       ) : (
-        <div className="">
+        <div>
           {messages.map((msg, index) => {
             const lastMessage = messages.length - 1 === index;
             return (
               <div
                 key={index}
-                className="flex items-center"
+                className="flex border-b-2 border-black border-opacity-50"
                 ref={lastMessage ? setRef : null}
               >
                 <img
                   src={msg.avatar}
                   alt={`${msg.sender}'s avatar'`}
-                  className="h-8 w-8 rounded-full my-1"
+                  className="h-10 w-10 rounded-full my-1"
                 />
-                <p>{msg.sender}: </p>
-                <p>{msg.text}</p>
+                <p className="mr-2 border-r-2 border-black border-opacity-50 pr-1">{msg.sender}: </p>
+                <p className="break-words">{msg.text}</p>
               </div>
             )}
           )}
