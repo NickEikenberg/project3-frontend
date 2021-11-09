@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import UserFavorites from './UserFavorites';
 
 const UserProfile = ({
@@ -12,7 +12,6 @@ const UserProfile = ({
 }) => {
   const [username, setUsername] = useState(user.username);
   const [avatar, setAvatar] = useState(user.avatar);
-  //   const [toggleUserProfile, setShowUserProfile] = useState(false);
 
   const updateUsername = (event) => {
     setUsername(event.target.value);
@@ -24,7 +23,6 @@ const UserProfile = ({
 
   const closeModal = (event) => {
     showUserProfile(false);
-    // setShowUserProfile(false);
   };
 
   const submitChanges = (event) => {
@@ -44,20 +42,10 @@ const UserProfile = ({
           setUsername(res.data.username);
           setAvatar(res.data.avatar);
           setCurrentUser(res.data);
-        } else {
-          //   setToggleError(true);
-          //   setErrorMessage(res.data);
+          showUserProfile(false);
         }
-        showUserProfile(false);
       });
   };
-
-  useEffect(() => {
-    setAvatar(avatar);
-    return () => {
-      setAvatar({});
-    };
-  }, []);
 
   return (
     <div className="relative h-screen w-screen flex flex-col justify-center items-center">
@@ -80,7 +68,7 @@ const UserProfile = ({
           <form>
             <input
               type="text"
-              onSubmit={updateUsername}
+              onChange={updateUsername}
               className="border-b-2 border-black bg-white bg-opacity-50 "
             ></input>
           </form>

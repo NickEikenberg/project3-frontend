@@ -1,9 +1,4 @@
-import React from 'react';
-
 const UserWelcome = ({ user, showUserProfile }) => {
-  //   const placeShowUserProfile = () => {
-  //     console.log('click');
-  //   };
   return (
     <div className="w-screen flex justify-center">
       {user.username ? (

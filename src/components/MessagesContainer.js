@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 const MessagesContainer = ({ gameState, messages, user }) => {
+  // function to scroll chat to most recent borrowed from socket.io/react tutorial found here: https://youtu.be/tBr-PybP_9c
   const setRef = useCallback(node => {
     if (node) {
       node.scrollIntoView({
