@@ -8,7 +8,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full flex justify-between items-center bg-white py-4 px-4 shadow-sm">
+    <header className="w-full flex justify-between items-center bg-white py-4 px-4 shadow-sm rounded-md">
       <h1 className="text-3xl text-center">Tinier Bananas</h1>
       {toggleSpin ?
         <div onClick={handleToggleSpin}>

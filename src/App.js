@@ -105,10 +105,7 @@ const App = () => {
   return (
     <div className="flex flex-col items-center m-6 bg-gray-50 rounded-md">
       <Header showUserProfile={setShowUserProfile} user={currentUser}></Header>
-      {currentUser.room ?
-        <UserWelcome
-          user={currentUser}
-        ></UserWelcome> :
+      {currentUser.username &&
         <UserWelcome
           user={currentUser}
           showUserProfile={toggleSetShowUserProfile}
