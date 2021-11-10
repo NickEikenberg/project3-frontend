@@ -8,7 +8,7 @@ const RoomMembers = ({ user, members, setMembers, gameState }) => {
   }, [user.socket, setMembers]);
 
   return (
-    <div className="bg-black text-white min-h-40">
+    <div className="bg-black text-white min-h-40 pl-2">
       <h4>Room Members:</h4>
       <ul>
         {members.map((member, index) => (

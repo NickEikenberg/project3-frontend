@@ -19,7 +19,7 @@ const randomize = (array) => {
   return array;
 };
 
-const Room = ({ user, setUser, handleLeave, }) => {
+const Room = ({ user, setUser, handleLeave }) => {
   const [messages, setMessages] = useState([]);
   const [members, setMembers] = useState([]);
   const [gameState, setGameState] = useState({
@@ -37,27 +37,27 @@ const Room = ({ user, setUser, handleLeave, }) => {
     user.socket.emit('end-game');
   };
 
-  useEffect(() => {
-    const incrementTurnOrder = () => {
-      setGameState((prevGameState) => {
-        if (!prevGameState.inProgress) return prevGameState;
-        if (
-          prevGameState.currentTurnIndex ===
-          prevGameState.turnOrder.length - 1
-        ) {
-          return {
-            ...prevGameState,
-            currentTurnIndex: 0,
-          };
-        } else {
-          return {
-            ...prevGameState,
-            currentTurnIndex: prevGameState.currentTurnIndex + 1,
-          };
-        }
-      });
-    };
+  const incrementTurnOrder = () => {
+    setGameState((prevGameState) => {
+      if (!prevGameState.inProgress) return prevGameState;
+      if (
+        prevGameState.currentTurnIndex ===
+        prevGameState.turnOrder.length - 1
+      ) {
+        return {
+          ...prevGameState,
+          currentTurnIndex: 0,
+        };
+      } else {
+        return {
+          ...prevGameState,
+          currentTurnIndex: prevGameState.currentTurnIndex + 1,
+        };
+      }
+    });
+  };
 
+  useEffect(() => {
     user.socket.on('receive-message', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
       incrementTurnOrder();
@@ -83,7 +83,7 @@ const Room = ({ user, setUser, handleLeave, }) => {
         };
       });
     });
-  }, [user.socket, setGameState]);
+  }, [user.socket]);
 
   return (
     <div className="flex flex-col w-full">

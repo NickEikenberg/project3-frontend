@@ -24,7 +24,7 @@ const MessageInputForm = ({ gameState, user, handleEndGame }) => {
         <form onSubmit={handleSubmit} className="relative overflow-hidden flex">
           <textarea
             ref={input}
-            className="border border-black rounded w-11/12 h-full resize-none"
+            className="border border-black rounded w-11/12 h-full resize-none px-2"
           ></textarea>
           <input
             type="submit"
@@ -46,7 +46,7 @@ const MessageInputForm = ({ gameState, user, handleEndGame }) => {
     <form onSubmit={handleSubmit} className="relative overflow-hidden flex">
       <textarea
         ref={input}
-        className="border border-black rounded w-11/12 h-full resize-none"
+        className="border border-black rounded w-11/12 h-full resize-none px-2"
       ></textarea>
       <input
         type="submit"
